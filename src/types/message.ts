@@ -6,5 +6,6 @@ export interface ICompany {
 export interface IMessage {
   name: string,
   email: string,
+  date: string,
   company: ICompany
 };

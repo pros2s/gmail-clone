@@ -5,6 +5,7 @@ import uniqid from 'uniqid';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelectore } from '../hooks/useTypedSelector';
 import { fetchApiMessages } from '../redux/slices/ActionCreatores';
+import Message from './Message';
 
 
 const MessageList: FC = () => {
@@ -13,7 +14,7 @@ const MessageList: FC = () => {
 
   useEffect(() => {
     dispatch(fetchApiMessages());
-  }, []);
+  }, []); // eslint-disable-line
 
 
   return (
@@ -27,7 +28,7 @@ const MessageList: FC = () => {
               <CSSTransition
                 key={ uniqid() }
                 timeout={ 450 }>
-                  <h1>{ message.name }</h1>
+                  <Message message={ message } />
               </CSSTransition>
             ))
           }
