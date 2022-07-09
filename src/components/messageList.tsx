@@ -1,37 +1,41 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import uniqid from 'uniqid';
 
-import { message } from '../types/message';
-
-import Message from './message';
-
-
-interface IMessages {
-  messages: message[]
-};
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useAppSelectore } from '../hooks/useTypedSelector';
+import { fetchApiMessages } from '../redux/slices/ActionCreatores';
 
 
-const MessageItem: FC<IMessages> = ({ messages }) => {
+const MessageList: FC = () => {
+  const { messages, isLoading, error } = useAppSelectore((state) => state.messagesReducer);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchApiMessages());
+  }, []);
+
+
   return (
     <div>
-      <div>
+      { isLoading && <h1>Loaging...</h1> }
+      { error && <h1>Error</h1> }
+      {
         <TransitionGroup>
           {
-            messages.map((message, i) => (
+            messages.map((message) => (
               <CSSTransition
-                key={ message.messageId }
-                timeout={ 450 }
-                classNames='message__animation'
-              >
-                <Message message={ message }/>
+                key={ uniqid() }
+                timeout={ 450 }>
+                  <h1>{ message.name }</h1>
               </CSSTransition>
             ))
           }
         </TransitionGroup>
-      </div>
+      }
     </div>
   );
 };
 
 
-export default MessageItem;
+export default MessageList;
