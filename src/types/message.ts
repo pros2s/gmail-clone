@@ -4,8 +4,13 @@ export interface ICompany {
 };
 
 export interface IMessage {
+  id: number,
   name: string,
   email: string,
-  date: string,
   company: ICompany
+};
+
+export interface IMessageContent {
+  id: number | null,
+  body: string
 };
