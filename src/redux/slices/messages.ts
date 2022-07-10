@@ -1,20 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PlatformPath } from 'path';
 
 import { IMessage } from '../../types/message';
-import { fetchApiMessages } from './ActionCreatores';
+import { fetchApiMessages } from './ActionCreators';
 
 
 interface MessageState {
   messages: IMessage[];
-  messageDate: string,
   isLoading: boolean;
   error: null | string;
 };
 
 const initialState: MessageState = {
   messages: [],
-  messageDate: '',
   isLoading: false,
   error: null
 };
@@ -22,15 +19,10 @@ const initialState: MessageState = {
 export const messagesSlice = createSlice({
   name: 'messages',
   initialState,
-  reducers: {
-    setRandomDate(state, { payload }: PayloadAction<string>) {
-      state.messageDate = payload;
-    }
-  },
+  reducers: {},
   extraReducers: {
     [ fetchApiMessages.pending.type ]: (state) => {
       state.isLoading = true;
-      state.messages = [];
     },
     [ fetchApiMessages.fulfilled.type ]: (state, { payload }: PayloadAction<IMessage[]>) => {
       state.messages = payload;
@@ -44,8 +36,6 @@ export const messagesSlice = createSlice({
     }
   }
 });
-
-export const { setRandomDate } = messagesSlice.actions;
 
 
 export default messagesSlice.reducer;
