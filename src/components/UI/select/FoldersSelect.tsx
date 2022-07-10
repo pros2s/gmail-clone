@@ -1,25 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { setFolderName } from '../../../redux/slices/folders';
+import { useAppSelector } from '../../../hooks/useTypedSelector';
 
 
 const FoldersSelect = () => {
+  const { folders } = useAppSelector((state) => state.selectFolderReducer);
   const route = useNavigate();
-  const dispatch = useAppDispatch();
 
-  const changeHandler = () => {
-    dispatch(setFolderName)
-  };
-
-  const options = [ 'Inbox', 'Sent', 'Draft', 'Deleted', 'Spam' ];
 
   return (
     <select onChange={ (event) => route(`/${ event.target.value }/`) }>
       {
-        options.map((option) =>
-          <option key={ option }>
-              { option }
+        folders.map((folder) =>
+          <option key={ folder }>
+              { folder }
           </option>
         )
       }

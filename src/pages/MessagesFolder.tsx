@@ -3,7 +3,7 @@ import MessageList from '../components/messageList/messageList';
 import ToolbarWrapper from '../wrappers/ToolbarWrapper';
 
 
-const Inbox: FC = () => {
+const MessagesFolder: FC = () => {
   return (
     <div>
       <MessageList />
@@ -12,4 +12,4 @@ const Inbox: FC = () => {
 };
 
 
-export default ToolbarWrapper(Inbox);
+export default ToolbarWrapper(MessagesFolder);

@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import messagesReducer from './slices/messages';
-import messageInfoReducer from './slices/messageBody'
+import messageInfoReducer from './slices/messageBody';
 import messageItemReducer from './slices/message';
-import foldersReducer from './slices/folders';
+import selectFolderReducer from './slices/selectFolder';
 
 
 export const store = configureStore({
@@ -10,7 +10,7 @@ export const store = configureStore({
     messagesReducer,
     messageInfoReducer,
     messageItemReducer,
-    foldersReducer
+    selectFolderReducer
   }
 });
 
