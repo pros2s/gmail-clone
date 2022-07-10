@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { IMessage } from '../../types/message';
+import { IMessage, IMessageContent } from '../../types/message';
 
 
 export const fetchApiMessages = createAsyncThunk(
@@ -13,6 +13,32 @@ export const fetchApiMessages = createAsyncThunk(
     }
     catch(e) {
       return thunkAPI.rejectWithValue('Error with fetch messages');
+    };
+  }
+);
+
+export const fetchApiMessageById = createAsyncThunk(
+  'messageInfo/fetchInfo',
+  async (id: string | undefined, thunkAPI) => {
+    try {
+      const responce = await axios.get<IMessage>(`https://jsonplaceholder.typicode.com/users/${ id }`);
+      return responce.data;
+    }
+    catch(e) {
+      return thunkAPI.rejectWithValue(`Error with fetch message(id: ${ id }`);
+    };
+  }
+);
+
+export const fetchMessageContent = createAsyncThunk(
+  'messageBody/fetchBody',
+  async (id: string | undefined, thunkAPI) => {
+    try {
+      const responce = await axios.get<IMessageContent>(`https://jsonplaceholder.typicode.com/posts/${ id }`);
+      return responce.data;
+    }
+    catch(e) {
+      return thunkAPI.rejectWithValue(`Error with fetch message(id: ${ id }) Content`);
     };
   }
 );
