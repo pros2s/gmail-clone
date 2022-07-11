@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/useTypedSelector';
 import { fetchApiMessageById, fetchMessageContent } from '../../redux/slices/ActionCreators';
 
 import './messageInfo.scss';
-import '../../index.scss';
+import '../../styles/index.scss';
 
 
 interface IMessageInfoProps {

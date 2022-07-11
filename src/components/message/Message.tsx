@@ -38,7 +38,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
     isChecked
       ? setFolderNames((state) => state.filter((elem) => elem !== 'Spam'))
       : setFolderNames((state) => [ ...state, 'Spam']);
-      
+
     setIsChecked((state) => !state);
   };
 
@@ -49,7 +49,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
         folder && folderNames.includes(folder) &&
         <div
           className='message'
-          onClick={ () => route(`/${ folder }/${ id }`)}>
+          onClick={ () => route(`/mailclone/${ folder }/${ id }`)}>
             <input
               type="checkbox"
               checked={ isChecked }

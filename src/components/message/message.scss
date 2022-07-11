@@ -1,3 +1,5 @@
+@import '../../styles/vars';
+
 .message {
   display: flex;
   justify-content: space-between;
@@ -7,7 +9,7 @@
   margin-bottom: 5px;
   padding: 25px;
 
-  color: rgb(83, 83, 83);
+  color: $primary-color;
 
   border-top: 1px solid rgba(145, 145, 145, 0.3);
   border-radius: 5px;
@@ -22,7 +24,7 @@
 
 .message__name {
   min-width: 200px;
-  
+
   font-weight: 600;
 }
 

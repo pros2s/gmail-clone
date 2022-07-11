@@ -8,7 +8,7 @@ import { fetchApiMessages } from '../../redux/slices/ActionCreators';
 import Message from '../message/Message';
 
 import './messageList.scss';
-import '../../index.scss';
+import '../../styles/index.scss';
 
 
 const MessageList: FC = () => {
