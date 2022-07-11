@@ -1,6 +1,5 @@
 import React, { FC, MouseEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import classNames from 'classnames';
 import {
   RiBookmark3Fill,
   RiDeleteBinFill,
@@ -29,14 +28,13 @@ const Message: FC<IMessageProps> = ({ message }) => {
 
   const [ folderNames, setFolderNames ] = useState([ 'Inbox' ]);
   const [ randDate, setRandDate ] = useState('');
-  const [ isStarred, setIsStarred ] = useState(false);
+  const [ isMarked, setIsMarked ] = useState(false);
   const [ isChecked, setIsChecked ] = useState(false);
-  const [ isDeleted, setIsDeleted ] = useState(false);
-  const [ isSpamed, setIsSpamed ] = useState(false);
 
   useEffect(() => {
     setDate();
   }, []);
+
 
   const setDate = () => {
     setRandDate(randomDate('02/13/2022', '01/01/2000'));
@@ -46,50 +44,33 @@ const Message: FC<IMessageProps> = ({ message }) => {
   const onClickCheck = (e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
 
-    !isChecked
-      ? dispatch(addChoosed(id))
-      : dispatch(removeById(id));
+    isChecked
+      ? dispatch(removeById(id))
+      : dispatch(addChoosed(id));
 
     setIsChecked((state) => !state);
   };
 
-  const onClickStar = (e: MouseEvent<SVGElement>) => {
+  const onClickMark = (e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
 
-    isStarred
+    isMarked
       ? setFolderNames((state) => state.filter((elem) => elem !== 'Marked'))
       : setFolderNames((state) => [ ...state, 'Marked']);
 
-    setIsStarred((state) => !state);
+    setIsMarked((state) => !state);
   };
 
-  const onClickDelete = (e: MouseEvent<SVGElement>) => {
+  const onClickRightBtns = (e: MouseEvent<SVGElement>, folderName: string) => {
     e.stopPropagation();
 
-    folder !== 'Deleted' && setFolderNames((state) => [ ...state, 'Deleted'].filter((folder) => folder === 'Deleted'));
+    if (folderName === 'Inbox') {
+      setFolderNames((state) => [ ...state, 'Inbox'].filter((folder) => folder !== 'Deleted' && folder !== 'Spam'));
+    }
+    else {
+      folder !== folderName && setFolderNames((state) => [ ...state, folderName ].filter((folder) => folderName === folder));
+    }
   };
-
-  const onClickSpam = (e: MouseEvent<SVGElement>) => {
-    e.stopPropagation();
-
-    folder !== 'Spam' && setFolderNames((state) => [ ...state, 'Spam'].filter((folder) => folder === 'Spam'));
-  };
-
-  const onClickBack = (e: MouseEvent<SVGElement>) => {
-    e.stopPropagation();
-
-    setFolderNames((state) => [ ...state, 'Inbox'].filter((folder) => folder !== 'Deleted' && folder !== 'Spam'));
-  };
-
-  const starClass = classNames({
-    'message__star': true,
-    'active': isStarred
-  })
-
-  const checkClass = classNames({
-    'message__check': true,
-    'active': isChecked
-  })
 
 
   return (
@@ -102,12 +83,12 @@ const Message: FC<IMessageProps> = ({ message }) => {
             <div className="message__tools-left d-flex">
               <RiCheckboxCircleFill
                 title='choose'
-                className={ checkClass }
+                className={ isChecked ? 'message__check active' : 'message__check' }
                 onClick={ (e) => onClickCheck(e) } />
               <RiBookmark3Fill
                 title='mark'
-                className={ starClass }
-                onClick={ (e) => onClickStar(e) } />
+                className={ isMarked ? 'message__star active' : 'message__star' }
+                onClick={ (e) => onClickMark(e) } />
             </div>
 
             <p className='message__name'>{ name }</p>
@@ -116,10 +97,10 @@ const Message: FC<IMessageProps> = ({ message }) => {
             <div className="message__tools-right">
               {
                 folder === 'Deleted' || folder === 'Spam' ?
-                <RiArrowGoBackFill onClick={ (e) => onClickBack(e) } /> :
+                <RiArrowGoBackFill onClick={ (e) => onClickRightBtns(e, 'Inbox') } /> :
                 <>
-                  <RiDeleteBinFill title='delete' onClick={ (e) => onClickDelete(e) } />
-                  <RiSpamFill title='spam' onClick={ (e) => onClickSpam(e) } />
+                  <RiDeleteBinFill title='delete' onClick={ (e) => onClickRightBtns(e, 'Deleted') } />
+                  <RiSpamFill title='spam' onClick={ (e) => onClickRightBtns(e, 'Spam') } />
                 </>
               }
             </div>
