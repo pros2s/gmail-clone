@@ -1,0 +1,17 @@
+@import '../../styles/vars';
+
+.error {
+  font-size: 30px;
+}
+
+.error__come-back {
+  align-items: center;
+  color: $primary-color;
+}
+
+.error__come-back-btn {
+  cursor: pointer;
+
+  margin-left: -40px;
+  margin-right: 10px;
+}

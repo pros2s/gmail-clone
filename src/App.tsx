@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import MessagesFolder from './pages/MessagesFolder';
 import MessageContent from './pages/MessageContent';
+import NotFound from './pages/NotFound/NotFound';
 
 
 function App() {
@@ -10,9 +11,10 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/:folder' element={ <MessagesFolder /> } />
-          <Route path='/:folder/:id' element={ <MessageContent /> } />
-          <Route path='/' element={ <Navigate replace to='/Inbox'/> } />
+          <Route path='/mailclone/:folder' element={ <MessagesFolder /> } />
+          <Route path='/mailclone/:folder/:id' element={ <MessageContent /> } />
+          <Route path='/' element={ <Navigate replace to='/mailclone/Inbox'/> } />
+          <Route path='*' element={ <NotFound /> } />
         </Routes>
       </BrowserRouter>
     </div>
