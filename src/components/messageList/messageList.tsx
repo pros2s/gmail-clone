@@ -9,6 +9,7 @@ import Message from '../message/Message';
 
 import './messageList.scss';
 import '../../styles/index.scss';
+import FoldersWrapper from '../../wrappers/foldersWrapper/FoldersWrapper';
 
 
 const MessageList: FC = () => {
@@ -21,7 +22,7 @@ const MessageList: FC = () => {
 
 
   return (
-    <div className="container">
+    <div>
 
       <div className='message__list'>
         { isLoading && <h1>Loaging...</h1> }
@@ -46,4 +47,4 @@ const MessageList: FC = () => {
 };
 
 
-export default MessageList;
+export default FoldersWrapper(MessageList);

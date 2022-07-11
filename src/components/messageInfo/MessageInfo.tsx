@@ -5,6 +5,7 @@ import { fetchApiMessageById, fetchMessageContent } from '../../redux/slices/Act
 
 import './messageInfo.scss';
 import '../../styles/index.scss';
+import FoldersWrapper from '../../wrappers/foldersWrapper/FoldersWrapper';
 
 
 interface IMessageInfoProps {
@@ -24,7 +25,7 @@ const MessageInfo: FC<IMessageInfoProps> = ({ messageId }) => {
 
 
   return (
-    <div className="container">
+    <div>
       { isLoading && <h1>Loading message...</h1>}
       { isError && <h1>{ isError }</h1>}
 
@@ -57,4 +58,4 @@ const MessageInfo: FC<IMessageInfoProps> = ({ messageId }) => {
 };
 
 
-export default MessageInfo;
+export default FoldersWrapper(MessageInfo);
