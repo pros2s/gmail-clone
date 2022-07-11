@@ -7,7 +7,7 @@
 
   max-height: 35px;
   margin-bottom: 5px;
-  padding: 25px;
+  padding: 25px 10px;
 
   color: $primary-color;
 
@@ -15,15 +15,56 @@
   border-radius: 5px;
   cursor: pointer;
 
-  transition: all .05s linear;
+  transition: all .2s linear;
 
   &:hover {
     box-shadow: 1px 1px 4px 1px rgba(34, 60, 80, 0.3);
+
+    .message__tools-left {
+      visibility: visible;
+    }
+
+    .message__date {
+      display: none;
+    }
+
+    .message__tools-right {
+      display: flex;
+
+      font-size: 20px;
+
+      svg {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.message__tools-left {
+  align-items: center;
+  visibility: hidden;
+  font-size: 20px;
+
+  .message__check {
+    margin-right: 7px;
+
+    &.active {
+      color: #000;
+      box-shadow: 1px 1px 14px -7px rgba(0, 0, 0, 1);
+    }
+  }
+
+  .message__star {
+    &.active {
+      color: #000;
+      box-shadow: 1px 1px 14px -7px rgba(0, 0, 0, 1);
+    }
   }
 }
 
 .message__name {
   min-width: 200px;
+  margin-left: 5px;
 
   font-weight: 600;
 }
@@ -36,4 +77,8 @@
   margin-left: auto;
 
   font-size: 14px;
+}
+
+.message__tools-right {
+  display: none;
 }

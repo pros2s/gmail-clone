@@ -3,6 +3,7 @@ import messagesReducer from './slices/messages';
 import messageInfoReducer from './slices/messageBody';
 import messageItemReducer from './slices/message';
 import foldersReducer from './slices/folders';
+import chosenMessagesReducer from './slices/chosenMessages';
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
     messagesReducer,
     messageInfoReducer,
     messageItemReducer,
-    foldersReducer
+    foldersReducer,
+    chosenMessagesReducer
   }
 });
 

@@ -6,7 +6,7 @@ import {
   RiDraftFill,
   RiDeleteBinLine,
   RiSpamLine,
-  RiStarLine
+  RiBookmark3Fill
 } from 'react-icons/ri';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
@@ -30,7 +30,7 @@ const Folders: FC = () => {
   const icons = [
     <RiInboxUnarchiveLine />,
     <RiSendPlane2Line />,
-    <RiStarLine />,
+    <RiBookmark3Fill />,
     <RiDraftFill />,
     <RiDeleteBinLine />,
     <RiSpamLine />

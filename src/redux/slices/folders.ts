@@ -7,7 +7,7 @@ interface FoldersState {
 };
 
 const initialState: FoldersState = {
-  folders: [ 'Inbox', 'Sent', 'Starred', 'Draft', 'Deleted', 'Spam' ],
+  folders: [ 'Inbox', 'Sent', 'Marked', 'Draft', 'Deleted', 'Spam' ],
   currentFolder: 'Inbox'
 };
 
