@@ -1,14 +1,19 @@
 import React, { FC, MouseEvent, useEffect, useState } from 'react';
-import { RiBookmark3Fill, RiDeleteBinFill, RiSpamFill, RiCheckboxCircleFill } from 'react-icons/ri';
 import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import {
+  RiBookmark3Fill,
+  RiDeleteBinFill,
+  RiSpamFill,
+  RiCheckboxCircleFill,
+  RiArrowGoBackFill
+} from 'react-icons/ri';
 
 import { randomDate } from '../../redux/slices/ActionCreators';
 import { IMessage } from '../../types/message';
 import './message.scss';
 import { addChoosed, removeById } from '../../redux/slices/chosenMessages';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useTypedSelector';
 
 
 interface IMessageProps {
@@ -18,7 +23,6 @@ interface IMessageProps {
 const Message: FC<IMessageProps> = ({ message }) => {
   const { name, company, id } = message;
 
-  const { messagesId } = useAppSelector((state) => state.chosenMessagesReducer);
   const dispatch = useAppDispatch();
   const { folder } = useParams();
   const route = useNavigate();
@@ -27,6 +31,8 @@ const Message: FC<IMessageProps> = ({ message }) => {
   const [ randDate, setRandDate ] = useState('');
   const [ isStarred, setIsStarred ] = useState(false);
   const [ isChecked, setIsChecked ] = useState(false);
+  const [ isDeleted, setIsDeleted ] = useState(false);
+  const [ isSpamed, setIsSpamed ] = useState(false);
 
   useEffect(() => {
     setDate();
@@ -55,6 +61,24 @@ const Message: FC<IMessageProps> = ({ message }) => {
       : setFolderNames((state) => [ ...state, 'Marked']);
 
     setIsStarred((state) => !state);
+  };
+
+  const onClickDelete = (e: MouseEvent<SVGElement>) => {
+    e.stopPropagation();
+
+    folder !== 'Deleted' && setFolderNames((state) => [ ...state, 'Deleted'].filter((folder) => folder === 'Deleted'));
+  };
+
+  const onClickSpam = (e: MouseEvent<SVGElement>) => {
+    e.stopPropagation();
+
+    folder !== 'Spam' && setFolderNames((state) => [ ...state, 'Spam'].filter((folder) => folder === 'Spam'));
+  };
+
+  const onClickBack = (e: MouseEvent<SVGElement>) => {
+    e.stopPropagation();
+
+    setFolderNames((state) => [ ...state, 'Inbox'].filter((folder) => folder !== 'Deleted' && folder !== 'Spam'));
   };
 
   const starClass = classNames({
@@ -89,10 +113,15 @@ const Message: FC<IMessageProps> = ({ message }) => {
             <p className='message__name'>{ name }</p>
             <p className='message__preview'>{ company.name }</p>
             <p className='message__date'>{ randDate }</p>
-
             <div className="message__tools-right">
-              <RiDeleteBinFill title='delete' />
-              <RiSpamFill title='spam' />
+              {
+                folder === 'Deleted' || folder === 'Spam' ?
+                <RiArrowGoBackFill onClick={ (e) => onClickBack(e) } /> :
+                <>
+                  <RiDeleteBinFill title='delete' onClick={ (e) => onClickDelete(e) } />
+                  <RiSpamFill title='spam' onClick={ (e) => onClickSpam(e) } />
+                </>
+              }
             </div>
         </div>
       }
