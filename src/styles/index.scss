@@ -19,6 +19,8 @@ h1,
 h2,
 h3,
 h4,
+ul,
+ol,
 p,
 li,
 figure,
@@ -27,6 +29,7 @@ blockquote,
 dl,
 dd {
   margin: 0;
+  padding: 0;
 }
 
 /* Выставляем основные настройки по-умолчанию для body */
@@ -67,8 +70,15 @@ select {
   font: inherit;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 .container {
-  max-width: 900px;
+  max-width: 1073px;
   margin: 20px auto;
   padding: 10px;
 };

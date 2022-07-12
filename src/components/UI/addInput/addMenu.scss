@@ -1,0 +1,46 @@
+@import '../../../styles/vars.scss';
+
+
+.add-menu {
+  align-items: center;
+  div {
+    display: flex;
+    align-items: center;
+    border: 1px $primary-color solid;
+    border-radius: 5px;
+
+    input {
+      max-width: 100px;
+      margin-left: 3px;
+
+      outline: none;
+      border: none;
+
+      &:focus {
+        color: $primary-color;
+      }
+    }
+
+    svg {
+      font-size: 20px;
+      margin-right: 3px;
+      
+      cursor: pointer;
+    }
+  }
+
+  svg {
+    font-size: 15px;
+    margin-left: 3px;
+
+    cursor: pointer;
+
+    transition: all .2s linear;
+
+    &:hover {
+      fill: darken($primary-color, 60%);
+
+      transform: rotate(90deg);
+    }
+  }
+}

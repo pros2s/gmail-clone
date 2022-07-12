@@ -1,16 +1,29 @@
 @import '../../styles/vars.scss';
 
 .folders {
+  position: relative;
+
   margin: 0 20px 0 0;
+  min-width: 150px;
 
   color: $primary-color;
+
+  ul::after {
+    content: "";
+    height: 1px;
+    width: 100px;
+    background-color: rgb(206 206 206);
+    position: absolute;
+    bottom: 345px;
+    left: 0;
+    z-index: 10;
+  }
 }
 
 .folders__item {
   align-items: center;
 
-  padding: 5px;
-  padding-left: 10px;
+  padding: 5px 10px;
 
   text-align: center;
   font-size: 17px;
@@ -28,4 +41,19 @@
     background-color: $primary-color;
     color: #fff;
   }
+}
+
+.folders__add {
+  font-size: 30px;
+  cursor: pointer;
+
+  margin-left: 3px;
+
+  &:hover {
+    fill: darken($primary-color, 60%);
+  }
+}
+
+.folders__custom {
+  margin-top: 10px;
 }
