@@ -21,7 +21,7 @@ const MessageInfo: FC<IMessageInfoProps> = ({ messageId }) => {
   useEffect(() => {
     dispatch(fetchMessageContent(messageId));
     dispatch(fetchApiMessageById(messageId));
-  }, [])
+  }, []) //eslint-disable-line
 
 
   return (

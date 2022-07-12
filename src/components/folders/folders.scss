@@ -1,27 +1,24 @@
 @import '../../styles/vars.scss';
 
 .folders {
-  position: relative;
-
   margin: 0 20px 0 0;
-  min-width: 150px;
+  min-width: 180px;
 
   color: $primary-color;
+}
 
-  ul::after {
-    content: "";
-    height: 1px;
-    width: 100px;
-    background-color: rgb(206 206 206);
-    position: absolute;
-    bottom: 345px;
-    left: 0;
-    z-index: 10;
-  }
+.folders__line {
+  display: inline-block;
+
+  height: 1px;
+  width: 100px;
+
+  background-color: rgb(206 206 206);
 }
 
 .folders__item {
   align-items: center;
+  justify-content: space-between;
 
   padding: 5px 10px;
 
@@ -40,20 +37,55 @@
   &:hover {
     background-color: $primary-color;
     color: #fff;
+
+    .folders__item-tools {
+      visibility: visible;
+    }
   }
 }
 
 .folders__add {
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
 
-  margin-left: 3px;
+  color: $primary-color;
+
+  margin-left: 5px;
+
+  transition: all .1s linear;
 
   &:hover {
-    fill: darken($primary-color, 60%);
+    color: darken($primary-color, 60%);
+
+    transform: scale(1.2);
   }
 }
 
-.folders__custom {
-  margin-top: 10px;
+.folders__item-info {
+  align-items: center;
+}
+
+.folders__item-info-name {
+  max-width: 90px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.folders__item-tools {
+  align-items: center;
+
+  visibility: hidden;
+}
+
+.folders__item-tools-edit,
+.folders__item-tools-remove {
+  font-size: 15px;
+  margin-left: 5px;
+  transition: transform .1s linear;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }
