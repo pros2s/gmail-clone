@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
-import { RiCheckboxCircleFill, RiBookmark3Fill } from 'react-icons/ri';
+import { RiCheckboxCircleLine, RiBookmark3Fill } from 'react-icons/ri';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { addChoosed, removeById } from '../../../redux/slices/chosenMessages';
@@ -57,7 +57,7 @@ const ToolsLeft: FC<ToolsLeftProps> = ({
 
   return (
       <div className={ toolsLeftClassNames }>
-        <RiCheckboxCircleFill
+        <RiCheckboxCircleLine
           title='choose'
           className={ isChecked ? 'message__check active' : 'message__check' }
           onClick={ (e) => onClickCheck(e) } />

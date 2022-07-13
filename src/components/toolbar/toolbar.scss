@@ -1,0 +1,10 @@
+@import '../../styles/vars.scss';
+
+
+.toolbar {
+  color: $primary-color;
+
+  svg {
+    color: darken($primary-color, 20%);
+  }
+}

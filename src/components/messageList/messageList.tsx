@@ -9,7 +9,6 @@ import Message from '../message/Message';
 
 import './messageList.scss';
 import '../../styles/index.scss';
-import FoldersWrapper from '../../wrappers/foldersWrapper/FoldersWrapper';
 
 
 const MessageList: FC = () => {
@@ -47,4 +46,4 @@ const MessageList: FC = () => {
 };
 
 
-export default FoldersWrapper(MessageList);
+export default MessageList;

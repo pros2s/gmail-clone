@@ -1,6 +1,6 @@
 import React, { FC, ComponentType } from 'react';
 
-import Toolbar from '../components/UI/toolbar/Toolbar';
+import Toolbar from '../components/toolbar/Toolbar';
 
 
 const ToolbarWrapper = <P extends object>(Component: ComponentType<P>): FC<P> => function HOC({ ...props }) {

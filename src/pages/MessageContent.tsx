@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import MessageInfo from '../components/messageInfo/MessageInfo';
+import ToolbarWrapper from '../wrappers/ToolbarWrapper';
 
 
 const MessageContent: FC = () => {
@@ -15,4 +16,4 @@ const MessageContent: FC = () => {
 };
 
 
-export default MessageContent;
+export default ToolbarWrapper(MessageContent);

@@ -1,8 +1,7 @@
 import React, { FC, ComponentType } from 'react';
 
-import Folders from '../../components/folders/folders/Folders';
-import '../../styles/index.scss';
-import './foldersWrapper.scss';
+import Folders from '../components/folders/folders/Folders';
+import '../styles/index.scss';
 
 
 const FoldersWrapper = <P extends object>(Component: ComponentType<P>): FC<P> => function HOC({ ...props }) {

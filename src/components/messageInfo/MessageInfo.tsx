@@ -5,7 +5,7 @@ import { fetchApiMessageById, fetchMessageContent } from '../../redux/slices/Act
 
 import './messageInfo.scss';
 import '../../styles/index.scss';
-import FoldersWrapper from '../../wrappers/foldersWrapper/FoldersWrapper';
+import FoldersWrapper from '../../wrappers/FoldersWrapper';
 
 
 interface IMessageInfoProps {

@@ -1,0 +1,19 @@
+.toolbar__choose-all-btn,
+.toolbar__choose-arrow {
+  cursor: pointer;
+  transition: transform .1s linear;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.toolbar__choose-all-btn {
+  font-size: 25px;
+}
+
+.toolbar__choose-arrow {
+  font-size: 20px;
+
+  margin-left: 5px;
+}
