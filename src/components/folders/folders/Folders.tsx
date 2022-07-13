@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   RiInboxUnarchiveLine,
   RiSendPlane2Line,
@@ -30,6 +30,9 @@ import './folders.scss';
 
 const Folders: FC = () => {
   const route = useNavigate();
+  const params = useParams();
+  const folderName = params.folder;
+
   const dispatch = useAppDispatch();
   const { addition, editing, editingFolderName, customFolders } = useAppSelector((state) => state.customFoldersReducer);
 
@@ -48,7 +51,7 @@ const Folders: FC = () => {
   const mainFoldersElements = mainFolders.map((folder, i) => {
     return (
       <li
-        className="folders__item d-flex"
+        className={ folder === folderName ? 'folders__item active d-flex' : 'folders__item d-flex' }
         tabIndex={ 1 }
         onKeyUp={ (e) => onKeyUp(e) }
         key={ folder }
@@ -82,7 +85,7 @@ const Folders: FC = () => {
         onClick={ () => route(`/mailclone/${ folder }`) }>
           {
             editingFolderName === folder && editing ? <EditMenu /> :
-            <div className="folders__item d-flex">
+            <div className={ folder === folderName ? 'folders__item active d-flex' : 'folders__item d-flex' }>
               <div title={ folder } className="folders__item-info d-flex">
                 <RiFolder2Fill />
                 <p className='folders__item-info-name'>{ folder }</p>
@@ -107,10 +110,13 @@ const Folders: FC = () => {
       <ul>
         { mainFoldersElements }
       </ul>
+
       <div className="folders__line"></div>
+
       <ul className='folders__custom'>
         { customFoldersElements }
       </ul>
+
       {
         addition ? <AddMenu /> :
         <button

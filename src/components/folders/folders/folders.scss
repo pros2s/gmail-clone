@@ -20,7 +20,8 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 5px 10px;
+  padding: 3px 10px;
+  margin-bottom: 2px;
 
   text-align: center;
   font-size: 17px;
@@ -41,6 +42,11 @@
     .folders__item-tools {
       visibility: visible;
     }
+  }
+
+  &.active {
+    background-color: $primary-color;
+    color: #fff;
   }
 }
 
