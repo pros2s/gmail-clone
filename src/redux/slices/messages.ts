@@ -19,7 +19,14 @@ const initialState: MessageState = {
 export const messagesSlice = createSlice({
   name: 'messages',
   initialState,
-  reducers: {},
+  reducers: {
+    addMesage(state, { payload }: PayloadAction<IMessage>) {
+      state.messages = [ ...state.messages, payload ];
+    },
+    purgeMessages(state) {
+      state.messages = [];
+    }
+  },
   extraReducers: {
     [ fetchApiMessages.pending.type ]: (state) => {
       state.isLoading = true;
@@ -36,6 +43,8 @@ export const messagesSlice = createSlice({
     }
   }
 });
+
+export const { addMesage, purgeMessages } = messagesSlice.actions;
 
 
 export default messagesSlice.reducer;

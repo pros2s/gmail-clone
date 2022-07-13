@@ -14,7 +14,7 @@ interface IMessageProps {
 };
 
 const Message: FC<IMessageProps> = ({ message }) => {
-  const { name, company, id } = message;
+  const { name, username, id } = message;
 
   const { folder } = useParams();
   const route = useNavigate();
@@ -29,10 +29,18 @@ const Message: FC<IMessageProps> = ({ message }) => {
 
 
   useEffect(() => {
+    routeSentMessages();
     setRandDate(randomDate('02/13/2022', '01/01/2000'));
     // setRandDate(randomDate());
-  }, []);
+  }, []); // eslint-disable-line
 
+
+  const routeSentMessages = () => {
+    if (message.id.length > 1 && message.id !== '10') {
+      setFolderNames((state) => [ ...state, 'Sent' ].filter((item) => item !== 'Inbox'));
+      setIsRead(true);
+    };
+  };
 
   const onClickMessage = () => {
     setIsRead(true);
@@ -64,8 +72,8 @@ const Message: FC<IMessageProps> = ({ message }) => {
               isMarked={ isMarked }
               id={ id } />
 
-            <p className='message__name'>{ name }</p>
-            <p className='message__preview'>{ company.name }</p>
+            <p className='message__name'>{ username }</p>
+            <p className='message__preview'>{ name }</p>
             <p className='message__date'>{ randDate }</p>
 
             <ToolsRight
@@ -76,7 +84,8 @@ const Message: FC<IMessageProps> = ({ message }) => {
               folder={ folder }
               setIsChecked={ setIsChecked }
               setIsMarked={ setIsMarked }
-              isMore={ isMore }/>
+              isMore={ isMore }
+              messageId={ message.id } />
 
         </div>
       }

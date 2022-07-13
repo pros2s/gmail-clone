@@ -15,7 +15,7 @@ interface ToolsLeftProps {
   folder: string,
   isChecked: boolean,
   isMarked: boolean,
-  id: number
+  id: string
 };
 
 const ToolsLeft: FC<ToolsLeftProps> = ({

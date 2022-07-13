@@ -18,7 +18,11 @@ const initialState: MessageItemState = {
 export const messageItemSlice = createSlice({
   name: 'messageInfo',
   initialState,
-  reducers: {},
+  reducers: {
+    addInfo(state, { payload }: PayloadAction<IMessage>) {
+      state.info = payload;
+    }
+  },
   extraReducers: {
     [ fetchApiMessageById.pending.type ]: (state) => {
       state.isLoading = true;
@@ -35,6 +39,8 @@ export const messageItemSlice = createSlice({
     }
   }
 });
+
+export const { addInfo } = messageItemSlice.actions;
 
 
 export default messageItemSlice.reducer;

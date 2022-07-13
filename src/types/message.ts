@@ -1,16 +1,11 @@
-export interface ICompany {
-  name: string,
-  catchPhrase: string
-};
-
 export interface IMessage {
-  id: number,
+  id: string,
   name: string,
   email: string,
-  company: ICompany
+  username: string
 };
 
 export interface IMessageContent {
-  id: number | null,
+  id: string | null,
   body: string
 };

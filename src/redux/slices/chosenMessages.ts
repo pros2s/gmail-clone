@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 interface ChosenMessagesState {
-  messagesId: number[]
+  messagesId: string[]
 };
 
 const initialState: ChosenMessagesState = {
@@ -13,10 +13,10 @@ const chosenMessagesSlice = createSlice({
   name: 'chosen',
   initialState,
   reducers: {
-    addChoosed(state, { payload }: PayloadAction<number>) {
+    addChoosed(state, { payload }: PayloadAction<string>) {
       state.messagesId = [ ...state.messagesId, payload ];
     },
-    removeById(state, { payload }: PayloadAction<number>) {
+    removeById(state, { payload }: PayloadAction<string>) {
       state.messagesId = state.messagesId.filter((id) => id !== payload);
     }
   }

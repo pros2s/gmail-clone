@@ -1,4 +1,9 @@
+@import '../../../styles/vars.scss';
+
+
 .toolbar__send {
+  position: relative;
+
   border-radius: 10px;
 
   padding: 3px 10px;
@@ -10,8 +15,8 @@
   transition: all .1s linear;
 
   &:hover {
-  background-color: #76fcda;
-  box-shadow: 0px 9px 15px -11px rgba(0, 0, 0, 0.55);
+    background-color: #76fcda;
+    box-shadow: 0px 9px 15px -11px rgba(0, 0, 0, 0.55);
   }
 }
 
@@ -27,4 +32,100 @@
   color: inherit;
   font-size: 18px;
   font-weight: 500;
+}
+
+.toolbar__send-modal {
+  display: none;
+
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+
+  background-color: rgba(0, 0 ,0, .4);
+
+  &.active {
+    display: block;
+  }
+}
+
+.toolbar__send-modal-content {
+  position: relative;
+  flex-direction: column;
+
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+
+  border: 2px solid $primary-color;
+  border-radius: 5px;
+  max-width: 500px;
+
+  input,
+  textarea {
+    position: relative;
+
+    outline: none;
+    border: none;
+    margin-bottom: 5px;
+
+    color: inherit;
+    font-weight: 500;
+  }
+
+  textarea {
+    margin-top: 10px;
+    resize: none;
+  }
+
+  button {
+    margin-right: auto;
+    margin-top: 15px;
+    padding: 5px 10px;
+
+    color: inherit;
+    cursor: pointer;
+
+    border-radius: 5px;
+    font-weight: 500;
+    background-color: #76fcda;
+
+    transition: box-shadow .1s linear;
+
+    &:hover {
+      box-shadow: 0px 9px 15px -11px rgba(0, 0, 0, 0.55);
+    }
+  }
+}
+
+.toolbar__send-close-modal {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 10;
+
+  font-size: 20px;
+
+  transition: transform .1s linear;
+
+  &:hover {
+    transform: rotate(90deg);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.toolbar__send-input-error {
+  margin-top: -5px;
+  padding-left: 2px;
+
+  font-size: 11px;
+  color: rgba(247, 38, 90, 0.945);
 }

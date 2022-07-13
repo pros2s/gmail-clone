@@ -20,7 +20,8 @@ interface ToolsRightProps {
   setIsMarked: Dispatch<SetStateAction<boolean>>,
   folderNames: string[],
   folder: string,
-  isMore: boolean
+  isMore: boolean,
+  messageId: string
 };
 
 const ToolsRight: FC<ToolsRightProps> = ({
@@ -31,7 +32,8 @@ const ToolsRight: FC<ToolsRightProps> = ({
   setIsMarked,
   folderNames,
   folder,
-  isMore
+  isMore,
+  messageId
 }) => {
   const [ showAddMenu, setShowAddMenu ] = useState(false);
   const [ showDelMenu, setShowDelMenu ] = useState(false);
@@ -44,6 +46,12 @@ const ToolsRight: FC<ToolsRightProps> = ({
 
     setIsChecked(false);
     setIsMarked(false);
+  };
+
+  const onClickBack = (e: MouseEvent<SVGElement>) => {
+    messageId.length === 1 || messageId === '10'
+      ? onClickRightBtns(e, 'Inbox')
+      : onClickRightBtns(e, 'Sent');
   };
 
   const onClickMore = (e: MouseEvent<SVGElement>) => {
@@ -61,7 +69,7 @@ const ToolsRight: FC<ToolsRightProps> = ({
     <div className="message__tools-right">
       {
         folder === 'Deleted' || folder === 'Spam'
-          ? <RiArrowGoBackFill onClick={ (e) => onClickRightBtns(e, 'Inbox') } />
+          ? <RiArrowGoBackFill onClick={ (e) => onClickBack(e) } />
           :
           <>
             <RiDeleteBinFill style={{ marginRight: 3 }} title='delete' onClick={ (e) => onClickRightBtns(e, 'Deleted') } />

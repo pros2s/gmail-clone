@@ -18,7 +18,11 @@ const initialState: MessageContentState = {
 export const messageInfoSlice = createSlice({
   name: 'messageBody',
   initialState,
-  reducers: {},
+  reducers: {
+    addContent(state, { payload }: PayloadAction<IMessageContent>) {
+      state.content = payload;
+    }
+  },
   extraReducers: {
     [ fetchMessageContent.pending.type ]: (state) => {
       state.isLoading = true;
@@ -36,6 +40,8 @@ export const messageInfoSlice = createSlice({
     }
   }
 });
+
+export const { addContent } = messageInfoSlice.actions;
 
 
 export default messageInfoSlice.reducer;
