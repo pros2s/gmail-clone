@@ -49,7 +49,7 @@ const ToolsRight: FC<ToolsRightProps> = ({
   };
 
   const onClickBack = (e: MouseEvent<SVGElement>) => {
-    messageId.length === 1 || messageId === '10'
+    messageId.toString().length === 1 || messageId === '10'
       ? onClickRightBtns(e, 'Inbox')
       : onClickRightBtns(e, 'Sent');
   };

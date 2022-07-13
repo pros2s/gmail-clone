@@ -36,7 +36,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
 
 
   const routeSentMessages = () => {
-    if (message.id.length > 1 && message.id !== '10') {
+    if (id.length > 1 && id !== '10') {
       setFolderNames((state) => [ ...state, 'Sent' ].filter((item) => item !== 'Inbox'));
       setIsRead(true);
     };
@@ -85,7 +85,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
               setIsChecked={ setIsChecked }
               setIsMarked={ setIsMarked }
               isMore={ isMore }
-              messageId={ message.id } />
+              messageId={ id } />
 
         </div>
       }
