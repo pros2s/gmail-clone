@@ -22,7 +22,6 @@ const Message: FC<IMessageProps> = ({ message }) => {
   const [ folderNames, setFolderNames ] = useState<string[]>([ 'Inbox' ]);
   const [ randDate, setRandDate ] = useState<string>('');
 
-  const [ isShowModal, setIsShowModal ] = useState<boolean>(false);
   const [ isChecked, setIsChecked ] = useState<boolean>(false);
   const [ isMarked, setIsMarked ] = useState<boolean>(false);
   const [ isMore, setIsMore ] = useState<boolean>(false);
@@ -72,14 +71,12 @@ const Message: FC<IMessageProps> = ({ message }) => {
             <ToolsRight
               setFolderNames={ setFolderNames }
               setIsMore={ setIsMore }
-              setIsShowModal={ setIsShowModal }
               setIsRead={ setIsRead }
-              folderNames={ folderNames }
+              folderNames={ folderNames}
               folder={ folder }
               setIsChecked={ setIsChecked }
               setIsMarked={ setIsMarked }
-              isMore={ isMore }
-              isShowModal={ isShowModal } />
+              isMore={ isMore }/>
 
         </div>
       }

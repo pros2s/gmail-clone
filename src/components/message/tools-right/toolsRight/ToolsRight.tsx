@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
+import React, { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
 import {
   RiArrowGoBackFill,
   RiDeleteBinFill,
@@ -15,28 +15,26 @@ import './toolsRight.scss';
 interface ToolsRightProps {
   setFolderNames: Dispatch<SetStateAction<string[]>>,
   setIsMore: Dispatch<SetStateAction<boolean>>,
-  setIsShowModal: Dispatch<SetStateAction<boolean>>,
   setIsRead: Dispatch<SetStateAction<boolean>>,
   setIsChecked: Dispatch<SetStateAction<boolean>>,
   setIsMarked: Dispatch<SetStateAction<boolean>>,
   folderNames: string[],
   folder: string,
-  isMore: boolean,
-  isShowModal: boolean
+  isMore: boolean
 };
 
 const ToolsRight: FC<ToolsRightProps> = ({
   setFolderNames,
   setIsMore,
-  setIsShowModal,
   setIsRead,
   setIsChecked,
   setIsMarked,
   folderNames,
   folder,
-  isMore,
-  isShowModal
+  isMore
 }) => {
+  const [ showAddMenu, setShowAddMenu ] = useState(false);
+  const [ showDelMenu, setShowDelMenu ] = useState(false);
 
   const onClickRightBtns = (e: MouseEvent<SVGElement>, folder: string) => {
     e.stopPropagation();
@@ -55,7 +53,8 @@ const ToolsRight: FC<ToolsRightProps> = ({
 
   const onLeaveRightTools = () => {
     setIsMore(false);
-    setIsShowModal(false);
+    setShowAddMenu(false);
+    setShowDelMenu(false);
   };
 
   return (
@@ -78,13 +77,17 @@ const ToolsRight: FC<ToolsRightProps> = ({
                   <MoreTools
                     setIsMore={ setIsMore }
                     setIsRead={ setIsRead }
-                    setIsShowModal={ setIsShowModal } />
+                    folderNames={ folderNames }
+                    setShowAddMenu={ setShowAddMenu }
+                    setShowDelMenu={ setShowDelMenu } />
 
                   <FoldersModal
                     setFolderNames={ setFolderNames }
-                    setIsMore={ setIsMore }
                     folderNames={ folderNames }
-                    isShowModal={ isShowModal } />
+                    showAddMenu={ showAddMenu }
+                    showDelMenu={ showDelMenu }
+                    setShowAddMenu={ setShowAddMenu }
+                    setShowDelMenu={ setShowDelMenu }  />
               </div>
             </div>
           </>
