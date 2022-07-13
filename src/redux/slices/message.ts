@@ -5,14 +5,12 @@ import { fetchApiMessageById } from "./ActionCreators";
 
 interface MessageItemState {
   info: IMessage | null,
-  folderName: string,
   isLoading: boolean,
   isError: string
 }
 
 const initialState: MessageItemState = {
   info: null,
-  folderName: 'Inbox',
   isLoading: false,
   isError: ''
 };
@@ -20,11 +18,7 @@ const initialState: MessageItemState = {
 export const messageItemSlice = createSlice({
   name: 'messageInfo',
   initialState,
-  reducers: {
-    setFolderName(state, { payload }: PayloadAction<string>) {
-      state.folderName = payload;
-    }
-  },
+  reducers: {},
   extraReducers: {
     [ fetchApiMessageById.pending.type ]: (state) => {
       state.isLoading = true;
@@ -41,8 +35,6 @@ export const messageItemSlice = createSlice({
     }
   }
 });
-
-export const { setFolderName } = messageItemSlice.actions;
 
 
 export default messageItemSlice.reducer;

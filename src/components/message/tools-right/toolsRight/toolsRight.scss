@@ -1,0 +1,18 @@
+.message__tools-right {
+  display: none;
+
+  transition: all .1s linear;
+}
+
+.message__tools-right-more-menu {
+  display: none;
+
+  position: absolute;
+  top: 112%;
+  right: -12px;
+  z-index: 1;
+
+  &.active {
+    display: flex;
+  }
+}
