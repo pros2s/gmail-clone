@@ -19,6 +19,7 @@ interface ToolsRightProps {
   setIsRead: Dispatch<SetStateAction<boolean>>,
   setIsChecked: Dispatch<SetStateAction<boolean>>,
   setIsMarked: Dispatch<SetStateAction<boolean>>,
+  folderNames: string[],
   folder: string,
   isMore: boolean,
   isShowModal: boolean
@@ -31,6 +32,7 @@ const ToolsRight: FC<ToolsRightProps> = ({
   setIsRead,
   setIsChecked,
   setIsMarked,
+  folderNames,
   folder,
   isMore,
   isShowModal
@@ -80,7 +82,8 @@ const ToolsRight: FC<ToolsRightProps> = ({
 
                   <FoldersModal
                     setFolderNames={ setFolderNames }
-                    setIsShowModal={ setIsShowModal }
+                    setIsMore={ setIsMore }
+                    folderNames={ folderNames }
                     isShowModal={ isShowModal } />
               </div>
             </div>

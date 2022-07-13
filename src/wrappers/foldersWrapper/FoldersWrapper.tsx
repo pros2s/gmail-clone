@@ -1,6 +1,6 @@
 import React, { FC, ComponentType } from 'react';
 
-import Folders from '../../components/folders/Folders';
+import Folders from '../../components/folders/folders/Folders';
 import '../../styles/index.scss';
 import './foldersWrapper.scss';
 

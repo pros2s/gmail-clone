@@ -68,7 +68,7 @@ const ValidateMenu: FC<ValidateMenuProps> = ({ defaultValue, inputRef, title, to
                     }
                   </button>
                 </form>
-                <RiCloseLine onClick={ () => dispatch(toggleHandler()) } title='cancel' />
+                <RiCloseLine onClick={ () => dispatch(toggleHandler()) } title='cancel' tabIndex={ 1 } />
               </div>
               <ErrorMessage className='validate-menu__error' component='div' name='folderInput' />
             </div>

@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useRef } from 'react';
 
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { useAppSelector } from '../../../hooks/useTypedSelector';
-import { changeFolderName, editingToggle } from '../../../redux/slices/customFolders';
-import ValidateMenu from '../validateMenu/ValidateMenu';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useTypedSelector';
+import { changeFolderName, editingToggle } from '../../redux/slices/customFolders';
+import ValidateMenu from './validateMenu/ValidateMenu';
 
-import '../../../styles/index.scss';
+import '../../styles/index.scss';
 
 
 const EditMenu: FC = () => {

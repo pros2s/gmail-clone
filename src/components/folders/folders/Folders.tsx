@@ -12,19 +12,19 @@ import {
   RiEdit2Fill
 } from 'react-icons/ri';
 
-import AddMenu from '../UI/addMenu/AddMenu';
-import EditMenu from '../UI/editMenu/EditMenu';
-import { useAppSelector } from '../../hooks/useTypedSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import onKeyUp from '../../hooks/useKeyUp';
+import AddMenu from '../AddMenu';
+import EditMenu from '../EditMenu';
+import { useAppSelector } from '../../../hooks/useTypedSelector';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import onKeyUp from '../../../hooks/useKeyUp';
 import {
   additionToggle,
   editingToggle,
   setEditingFolderName,
   removeCustomFolder
-} from '../../redux/slices/customFolders';
+} from '../../../redux/slices/customFolders';
 
-import '../../styles/index.scss';
+import '../../../styles/index.scss';
 import './folders.scss';
 
 
@@ -69,6 +69,7 @@ const Folders: FC = () => {
 
   const onClickDelete = (folder: string, e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
+    route(`/mailclone/Inbox`);
     dispatch(removeCustomFolder(folder))
   };
 

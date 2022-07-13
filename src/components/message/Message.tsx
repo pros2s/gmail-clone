@@ -74,6 +74,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
               setIsMore={ setIsMore }
               setIsShowModal={ setIsShowModal }
               setIsRead={ setIsRead }
+              folderNames={ folderNames }
               folder={ folder }
               setIsChecked={ setIsChecked }
               setIsMarked={ setIsMarked }
