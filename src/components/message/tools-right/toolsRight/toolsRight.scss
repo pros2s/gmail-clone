@@ -2,6 +2,20 @@
   display: none;
 
   transition: all .1s linear;
+
+  &.sent {
+    .message__tools-right-spam {
+      display: none;
+    }
+
+    .message__tools-right-delete {
+      margin-right: 5px;
+    }
+  }
+}
+
+.message__tools-right-delete {
+  margin-right: -7px;
 }
 
 .message__tools-right-more-menu {

@@ -22,7 +22,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
   const [ folderNames, setFolderNames ] = useState<string[]>([ 'Inbox' ]);
   const [ randDate, setRandDate ] = useState<string>('');
 
-  const [ isChecked, setIsChecked ] = useState<boolean>(false);
+  const [ isSelected, setIsSelected ] = useState<boolean>(false);
   const [ isMarked, setIsMarked ] = useState<boolean>(false);
   const [ isMore, setIsMore ] = useState<boolean>(false);
   const [ isRead, setIsRead ] = useState<boolean>(false);
@@ -50,7 +50,8 @@ const Message: FC<IMessageProps> = ({ message }) => {
   const messageClassName = classNames({
     'message': true,
     'active': isMore,
-    'notRead': !isRead
+    'notRead': !isRead,
+    'selected': isSelected
   });
 
 
@@ -65,10 +66,10 @@ const Message: FC<IMessageProps> = ({ message }) => {
 
             <ToolsLeft
               setFolderNames={ setFolderNames }
-              setIsChecked={ setIsChecked }
+              setIsSelected={ setIsSelected }
               setIsMarked={ setIsMarked }
               folder={ folder }
-              isChecked={ isChecked }
+              isSelected={ isSelected }
               isMarked={ isMarked }
               id={ id } />
 
@@ -82,10 +83,11 @@ const Message: FC<IMessageProps> = ({ message }) => {
               setIsRead={ setIsRead }
               folderNames={ folderNames}
               folder={ folder }
-              setIsChecked={ setIsChecked }
+              setIsSelected={ setIsSelected }
               setIsMarked={ setIsMarked }
               isMore={ isMore }
-              messageId={ id } />
+              messageId={ id }
+              isRead={ isRead } />
 
         </div>
       }

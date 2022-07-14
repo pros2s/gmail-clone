@@ -1,5 +1,5 @@
-.toolbar__choose-all-btn,
-.toolbar__choose-arrow {
+.toolbar__select-all-btn,
+.toolbar__select-arrow {
   cursor: pointer;
   transition: transform .1s linear;
 
@@ -8,11 +8,11 @@
   }
 }
 
-.toolbar__choose-all-btn {
+.toolbar__select-all-btn {
   font-size: 25px;
 }
 
-.toolbar__choose-arrow {
+.toolbar__select-arrow {
   font-size: 20px;
 
   margin-left: 5px;

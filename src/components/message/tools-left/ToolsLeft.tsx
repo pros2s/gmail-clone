@@ -3,27 +3,27 @@ import React, { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
 import { RiCheckboxCircleLine, RiBookmark3Fill } from 'react-icons/ri';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { addChoosed, removeById } from '../../../redux/slices/chosenMessages';
+import { addChoosed, removeById } from '../../../redux/slices/selectedMessages';
 
 import './toolsLeft.scss';
 
 
 interface ToolsLeftProps {
   setFolderNames: Dispatch<SetStateAction<string[]>>,
-  setIsChecked: Dispatch<SetStateAction<boolean>>,
+  setIsSelected: Dispatch<SetStateAction<boolean>>,
   setIsMarked: Dispatch<SetStateAction<boolean>>,
   folder: string,
-  isChecked: boolean,
+  isSelected: boolean,
   isMarked: boolean,
   id: string
 };
 
 const ToolsLeft: FC<ToolsLeftProps> = ({
   setFolderNames,
-  setIsChecked,
+  setIsSelected,
   setIsMarked,
   folder,
-  isChecked,
+  isSelected,
   isMarked,
   id
 }) => {
@@ -32,11 +32,11 @@ const ToolsLeft: FC<ToolsLeftProps> = ({
   const onClickCheck = (e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
 
-    isChecked
+    isSelected
       ? dispatch(removeById(id))
       : dispatch(addChoosed(id));
 
-    setIsChecked((state) => !state);
+    setIsSelected((state) => !state);
   };
 
   const onClickMark = (e: MouseEvent<SVGElement>) => {
@@ -58,8 +58,8 @@ const ToolsLeft: FC<ToolsLeftProps> = ({
   return (
       <div className={ toolsLeftClassNames }>
         <RiCheckboxCircleLine
-          title='choose'
-          className={ isChecked ? 'message__check active' : 'message__check' }
+          title='select'
+          className={ isSelected ? 'message__check active' : 'message__check' }
           onClick={ (e) => onClickCheck(e) } />
 
         <RiBookmark3Fill

@@ -4,6 +4,7 @@ import uniqid from 'uniqid';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useTypedSelector';
+import { clearSelected } from '../../redux/slices/selectedMessages';
 import { fetchApiMessages } from '../../redux/slices/ActionCreators';
 import Message from '../message/Message';
 
@@ -16,6 +17,7 @@ const MessageList: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(clearSelected());
     dispatch(fetchApiMessages());
   }, []); // eslint-disable-line
 

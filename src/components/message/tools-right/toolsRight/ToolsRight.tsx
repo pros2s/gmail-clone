@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
 import {
   RiArrowGoBackFill,
@@ -5,6 +6,9 @@ import {
   RiSpamFill,
   RiMore2Fill
 } from 'react-icons/ri';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { removeById } from '../../../../redux/slices/selectedMessages';
 
 import FoldersModal from '../foldersModal/FoldersModal';
 import MoreTools from '../moreTools/MoreTools';
@@ -16,11 +20,12 @@ interface ToolsRightProps {
   setFolderNames: Dispatch<SetStateAction<string[]>>,
   setIsMore: Dispatch<SetStateAction<boolean>>,
   setIsRead: Dispatch<SetStateAction<boolean>>,
-  setIsChecked: Dispatch<SetStateAction<boolean>>,
+  setIsSelected: Dispatch<SetStateAction<boolean>>,
   setIsMarked: Dispatch<SetStateAction<boolean>>,
   folderNames: string[],
   folder: string,
   isMore: boolean,
+  isRead: boolean,
   messageId: string
 };
 
@@ -28,13 +33,17 @@ const ToolsRight: FC<ToolsRightProps> = ({
   setFolderNames,
   setIsMore,
   setIsRead,
-  setIsChecked,
+  setIsSelected,
   setIsMarked,
   folderNames,
   folder,
   isMore,
+  isRead,
   messageId
 }) => {
+  const dispatch = useAppDispatch();
+  const params = useParams();
+
   const [ showAddMenu, setShowAddMenu ] = useState(false);
   const [ showDelMenu, setShowDelMenu ] = useState(false);
 
@@ -44,8 +53,10 @@ const ToolsRight: FC<ToolsRightProps> = ({
     setFolderNames([]);
     setFolderNames((state) => [ ...state, folder ]);
 
-    setIsChecked(false);
+    setIsSelected(false);
     setIsMarked(false);
+
+    dispatch(removeById(messageId));
   };
 
   const onClickBack = (e: MouseEvent<SVGElement>) => {
@@ -65,15 +76,20 @@ const ToolsRight: FC<ToolsRightProps> = ({
     setShowDelMenu(false);
   };
 
+  const toolsRightClassNames = classNames({
+    'message__tools-right': true,
+    'sent': params.folder === 'Sent'
+  });
+
   return (
-    <div className="message__tools-right">
+    <div className={ toolsRightClassNames }>
       {
         folder === 'Deleted' || folder === 'Spam'
           ? <RiArrowGoBackFill onClick={ (e) => onClickBack(e) } />
           :
           <>
-            <RiDeleteBinFill style={{ marginRight: 3 }} title='delete' onClick={ (e) => onClickRightBtns(e, 'Deleted') } />
-            <RiSpamFill title='spam' onClick={ (e) => onClickRightBtns(e, 'Spam') } />
+            <RiSpamFill className='message__tools-right-spam' title='spam' onClick={ (e) => onClickRightBtns(e, 'Spam') } />
+            <RiDeleteBinFill className='message__tools-right-delete' title='delete' onClick={ (e) => onClickRightBtns(e, 'Deleted') } />
 
             <div className="message__tools-right-more d-flex">
               <RiMore2Fill
@@ -87,7 +103,8 @@ const ToolsRight: FC<ToolsRightProps> = ({
                     setIsRead={ setIsRead }
                     folderNames={ folderNames }
                     setShowAddMenu={ setShowAddMenu }
-                    setShowDelMenu={ setShowDelMenu } />
+                    setShowDelMenu={ setShowDelMenu }
+                    isRead={ isRead } />
 
                   <FoldersModal
                     setFolderNames={ setFolderNames }

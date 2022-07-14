@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import Choose from './choose/Choose';
+import Choose from './select/Select';
+import ChooseMenu from './selectedMenu/SelectedMenu';
 import Search from './search/Search';
 import Send from './send/Send';
 
@@ -13,6 +14,7 @@ const Toolbar: FC = () => {
 
         <Send />
         <Choose />
+        <ChooseMenu />
         <Search />
 
       </div>

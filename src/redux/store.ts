@@ -14,8 +14,9 @@ import storage from 'redux-persist/lib/storage';
 import messagesReducer from './slices/messages';
 import messageInfoReducer from './slices/messageBody';
 import messageItemReducer from './slices/message';
-import chosenMessagesReducer from './slices/chosenMessages';
+import selectedMessagesReducer from './slices/selectedMessages';
 import customFoldersReducer from './slices/customFolders';
+import messageFolderNamesReducer from './slices/messageFolderNames';
 
 
 const persistConfig = {
@@ -28,8 +29,9 @@ const rootRducer = combineReducers({
   messagesReducer,
   messageInfoReducer,
   messageItemReducer,
-  chosenMessagesReducer,
-  customFoldersReducer
+  selectedMessagesReducer,
+  customFoldersReducer,
+  messageFolderNamesReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootRducer);

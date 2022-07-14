@@ -1,5 +1,6 @@
 import React, { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
 import { RiFolderSharedLine, RiMailCheckLine, RiFolderReceivedLine } from 'react-icons/ri';
+import { useParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../../../hooks/useTypedSelector';
 
@@ -11,11 +12,13 @@ interface MoreToolsProps {
   setIsMore: Dispatch<SetStateAction<boolean>>,
   setShowAddMenu: Dispatch<SetStateAction<boolean>>,
   setShowDelMenu: Dispatch<SetStateAction<boolean>>,
-  folderNames: string[]
+  folderNames: string[],
+  isRead: boolean
 };
 
-const MoreTools: FC<MoreToolsProps> = ({ setIsMore, setIsRead, setShowAddMenu, setShowDelMenu, folderNames }) => {
+const MoreTools: FC<MoreToolsProps> = ({ setIsMore, setIsRead, setShowAddMenu, setShowDelMenu, folderNames, isRead }) => {
   const { customFolders } = useAppSelector((state) => state.customFoldersReducer);
+  const { folder } = useParams();
 
 
   const markAsRead = (e: MouseEvent<HTMLDivElement>) => {
@@ -51,10 +54,13 @@ const MoreTools: FC<MoreToolsProps> = ({ setIsMore, setIsRead, setShowAddMenu, s
         <RiFolderReceivedLine />
       </div>
 
-      <div className='d-flex ai-center' onClick={ (e) => markAsRead(e) }>
-        <p>mark as read</p>
-        <RiMailCheckLine />
-      </div>
+      {
+        folder !== 'Sent' && !isRead &&
+        <div className='d-flex ai-center' onClick={ (e) => markAsRead(e) }>
+          <p>mark as read</p>
+          <RiMailCheckLine />
+        </div>
+      }
     </div>
   );
 };

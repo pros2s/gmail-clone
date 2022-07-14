@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-interface ChosenMessagesState {
+interface SelectedMessagesState {
   messagesId: string[]
 };
 
-const initialState: ChosenMessagesState = {
+const initialState: SelectedMessagesState = {
   messagesId: []
 };
 
-const chosenMessagesSlice = createSlice({
-  name: 'chosen',
+const selectedMessagesSlice = createSlice({
+  name: 'selected',
   initialState,
   reducers: {
     addChoosed(state, { payload }: PayloadAction<string>) {
@@ -18,11 +18,14 @@ const chosenMessagesSlice = createSlice({
     },
     removeById(state, { payload }: PayloadAction<string>) {
       state.messagesId = state.messagesId.filter((id) => id !== payload);
+    },
+    clearSelected(state) {
+      state.messagesId = []
     }
   }
 });
 
-export const { addChoosed, removeById } = chosenMessagesSlice.actions;
+export const { addChoosed, removeById, clearSelected } = selectedMessagesSlice.actions;
 
 
-export default chosenMessagesSlice.reducer;
+export default selectedMessagesSlice.reducer;
