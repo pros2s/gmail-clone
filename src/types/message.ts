@@ -7,5 +7,6 @@ export interface IMessage {
 
 export interface IMessageContent {
   id: string | null,
-  body: string
+  body: string,
+  date?: string
 };

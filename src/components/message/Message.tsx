@@ -7,6 +7,8 @@ import { IMessage } from '../../types/message';
 import './message.scss';
 import ToolsRight from './tools-right/toolsRight/ToolsRight';
 import ToolsLeft from './tools-left/ToolsLeft';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useTypedSelector';
 
 
 interface IMessageProps {
@@ -15,6 +17,7 @@ interface IMessageProps {
 
 const Message: FC<IMessageProps> = ({ message }) => {
   const { name, username, id } = message;
+  const { content } = useAppSelector((state) => state.messageInfoReducer);
 
   const { folder } = useParams();
   const route = useNavigate();
@@ -75,7 +78,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
 
             <p className='message__name'>{ username }</p>
             <p className='message__preview'>{ name }</p>
-            <p className='message__date'>{ randDate }</p>
+            <p className='message__date'>{ content?.date || randDate }</p>
 
             <ToolsRight
               setFolderNames={ setFolderNames }

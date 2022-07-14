@@ -68,7 +68,8 @@ const Send: FC = () => {
 
     const newMessageContent: IMessageContent = {
       body: values.message,
-      id: newId
+      id: newId,
+      date: new Date().toLocaleDateString()
     };
 
     dispatch(addContent(newMessageContent));
