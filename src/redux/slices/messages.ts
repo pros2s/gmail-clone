@@ -25,6 +25,9 @@ export const messagesSlice = createSlice({
     },
     purgeMessages(state) {
       state.messages = [];
+    },
+    setMessages(state, { payload }: PayloadAction<IMessage[]>) {
+      state.messages = payload;
     }
   },
   extraReducers: {
@@ -44,7 +47,7 @@ export const messagesSlice = createSlice({
   }
 });
 
-export const { addMesage, purgeMessages } = messagesSlice.actions;
+export const { addMesage, purgeMessages, setMessages } = messagesSlice.actions;
 
 
 export default messagesSlice.reducer;

@@ -3,9 +3,7 @@ import { useParams } from 'react-router-dom';
 import {
   RiDeleteBinLine,
   RiSpamLine,
-  RiFolderSharedLine,
   RiMailCheckLine,
-  RiFolderReceivedLine,
   RiBookmark3Line,
   RiMailUnreadLine,
   RiBookmark2Line
@@ -29,7 +27,7 @@ const SelectedMenu: FC = () => {
     settingTool === 'delete' || settingTool === 'spam'
       ? dispatch(clearTools())
       : dispatch(removeTool(removingTool));
-      
+
     dispatch(setTool(settingTool));
   };
 
@@ -63,19 +61,6 @@ const SelectedMenu: FC = () => {
               }
             </>
           }
-          <button
-            title='Add to'
-            className='selectedMenu__addTo d-flex'>
-              <RiFolderSharedLine />
-          </button>
-
-          <button
-            title='Remove from'
-            className='selectedMenu__removeFrom d-flex'
-            >
-            <RiFolderReceivedLine />
-          </button>
-
           <>
             {
               selectedType !== 'Marked' &&

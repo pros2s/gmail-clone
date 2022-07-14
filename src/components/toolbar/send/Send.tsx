@@ -8,11 +8,11 @@ import * as yup from 'yup';
 
 import './send.scss';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { addMesage } from '../../../redux/slices/messages';
 import { IMessage, IMessageContent } from '../../../types/message';
 import classNames from 'classnames';
 import { addContent } from '../../../redux/slices/messageBody';
 import { addInfo } from '../../../redux/slices/message';
+import { addNewMessage } from '../../../redux/slices/filteredMessages';
 
 
 interface ComposeForm {
@@ -69,11 +69,11 @@ const Send: FC = () => {
     const newMessageContent: IMessageContent = {
       body: values.message,
       id: newId,
-      date: new Date().toLocaleDateString()
+      date: (new Date()).toLocaleDateString()
     };
 
     dispatch(addContent(newMessageContent));
-    dispatch(addMesage(newMessage));
+    dispatch(addNewMessage(newMessage));
     dispatch(addInfo(newMessage));
     setIsSend(false);
   };

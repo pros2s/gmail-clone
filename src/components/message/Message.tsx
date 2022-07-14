@@ -156,7 +156,11 @@ const Message: FC<IMessageProps> = ({ message }) => {
 
             <p className='message__name'>{ username }</p>
             <p className='message__preview'>{ name }</p>
-            <p className='message__date'>{ content?.date || randDate }</p>
+            {
+              folder === 'Sent'
+                ? <p className='message__date'>{ content?.date }</p>
+                : <p className='message__date'>{ randDate }</p>
+            }
 
             <ToolsRight
               setFolderNames={ setFolderNames }

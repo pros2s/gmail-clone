@@ -18,13 +18,13 @@
     }
   }
 
-  label {
+  & {
     position: relative;
 
     button {
       position: absolute;
       right: 5px;
-      top: 2px;
+      top: 5px;
 
       cursor: pointer;
 
