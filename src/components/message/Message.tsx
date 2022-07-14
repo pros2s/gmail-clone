@@ -4,13 +4,15 @@ import classNames from 'classnames';
 
 import { randomDate } from '../../redux/slices/ActionCreators';
 import { IFolders, IMessage } from '../../types/message';
-import './message.scss';
 import ToolsRight from './tools-right/toolsRight/ToolsRight';
 import ToolsLeft from './tools-left/ToolsLeft';
+
 import { useAppSelector } from '../../hooks/useTypedSelector';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { addSelected, removeSeletedById } from '../../redux/slices/selectedMessages';
+import { selectedAllFalse, selectedAllTrue } from '../../redux/slices/selectedMenu';
 
+import './message.scss';
 
 interface IMessageProps {
   message: IMessage
@@ -19,20 +21,23 @@ interface IMessageProps {
 const Message: FC<IMessageProps> = ({ message }) => {
   const { name, username, id } = message;
   const dispatch = useAppDispatch();
+
+  const { selectedAll, selectedType } = useAppSelector((state) => state.selectedMenuReducer);
+  const { folderNamesArray } = useAppSelector((state) => state.selectedMessagesReducer);
   const { content } = useAppSelector((state) => state.messageInfoReducer);
-  const { selectedAll } = useAppSelector((state) => state.selectedAllRducer);
+  const { tools } = useAppSelector((state) => state.selectedToolsReducer);
+  const { messages } = useAppSelector((state) => state.messagesReducer);
 
   const { folder } = useParams();
   const route = useNavigate();
 
   const [ folderNames, setFolderNames ] = useState<string[]>([ 'Inbox' ]);
-  const [ randDate, setRandDate ] = useState<string>('');
-
   const [ isSelected, setIsSelected ] = useState<boolean>(false);
   const [ isMarked, setIsMarked ] = useState<boolean>(false);
   const [ isMore, setIsMore ] = useState<boolean>(false);
   const [ isRead, setIsRead ] = useState<boolean>(false);
 
+  const [ randDate, setRandDate ] = useState<string>('');
 
   useEffect(() => {
     routeSentMessages();
@@ -40,13 +45,45 @@ const Message: FC<IMessageProps> = ({ message }) => {
     // setRandDate(randomDate());
   }, []); // eslint-disable-line
 
-  useEffect(() => {
-    setIsSelected(false);
-  }, [ folder ]);
 
   useEffect(() => {
-    setIsSelected(selectedAll);
-  }, [ selectedAll ]);
+    (isSelected && tools.includes('unread') && setIsRead(false)) ||
+    (isSelected && tools.includes('read') && setIsRead(true)) ||
+    (isSelected && tools.includes('marked') && setIsMarked(true)) ||
+    (isSelected && tools.includes('unmarked') && setIsMarked(false)) ||
+    (isSelected && tools.includes('delete') && deleteAndSpamTools('Deleted')) ||
+    (isSelected && tools.includes('spam') && deleteAndSpamTools('Spam'));
+
+    clearSelected();
+  }, [ tools ]); // eslint-disable-line
+
+  useEffect(() => {
+    switch (selectedType) {
+      case 'Read': setIsSelected(isRead); break;
+      case 'Unread': setIsSelected(!isRead); break;
+      case 'Marked': setIsSelected(isMarked); break;
+      case 'Unmarked': setIsSelected(!isMarked); break;
+      default: setIsSelected(selectedAll); break;
+    };
+  }, [ selectedType ]); // eslint-disable-line
+
+
+  useEffect(() => {
+    clearSelected();
+  }, [ folder ]); // eslint-disable-line
+
+  useEffect(() => {
+    markChanges();
+  }, [ isMarked ]); // eslint-disable-line
+
+  useEffect(() => {
+    folder && folderNames.includes(folder) && setIsSelected(selectedAll);
+  }, [ selectedAll ]); // eslint-disable-line
+
+  useEffect(() => {
+    messages.length === folderNamesArray.length
+      && dispatch(selectedAllTrue());
+  }, [ folderNamesArray ]); // eslint-disable-line
 
   useEffect(() => {
     const newSelected: IFolders = {
@@ -55,8 +92,27 @@ const Message: FC<IMessageProps> = ({ message }) => {
     };
 
     isSelected ? dispatch(addSelected(newSelected)) : dispatch(removeSeletedById(id));
-  }, [ isSelected ]);
+  }, [ isSelected ]); // eslint-disable-line
 
+
+  const clearSelected = () => {
+    setIsSelected(false);
+    dispatch(selectedAllFalse());
+  };
+
+  const deleteAndSpamTools = (deleteOrSpam: string) => {
+    setFolderNames([]);
+    setFolderNames((state) => [ ...state, deleteOrSpam ]);
+  };
+
+  const markChanges = () => {
+    if (isMarked && !folderNames.includes('Deleted')) {
+      setFolderNames((state) => [ ...state, 'Marked' ]);
+    }
+    else {
+      setFolderNames((state) => state.filter((name) => name !== 'Marked'));
+    }
+  };
 
   const routeSentMessages = () => {
     if (id.length > 1 && id !== '10') {
@@ -69,6 +125,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
     setIsRead(true);
     route(`/mailclone/${ folder }/${ id }`);
   };
+
 
   const messageClassName = classNames({
     'message': true,

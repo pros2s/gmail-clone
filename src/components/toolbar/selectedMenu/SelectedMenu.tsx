@@ -6,17 +6,32 @@ import {
   RiFolderSharedLine,
   RiMailCheckLine,
   RiFolderReceivedLine,
-  RiBookmark3Line
+  RiBookmark3Line,
+  RiMailUnreadLine,
+  RiBookmark2Line
 } from 'react-icons/ri';
 
 import { useAppSelector } from '../../../hooks/useTypedSelector';
 
 import './selectedMenu.scss';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { clearTools, removeTool, setTool } from '../../../redux/slices/selectedTools';
 
 
 const SelectedMenu: FC = () => {
+  const dispatch = useAppDispatch();
   const { folder } = useParams();
   const { folderNamesArray } = useAppSelector((state) => state.selectedMessagesReducer);
+  const { selectedType } = useAppSelector((state) => state.selectedMenuReducer);
+
+
+  const onClicktool = (settingTool: string, removingTool: string) => {
+    settingTool === 'delete' || settingTool === 'spam'
+      ? dispatch(clearTools())
+      : dispatch(removeTool(removingTool));
+      
+    dispatch(setTool(settingTool));
+  };
 
 
   return (
@@ -26,29 +41,76 @@ const SelectedMenu: FC = () => {
         <div className='selectedMenu d-flex ai-center'>
           {
             folder !== 'Sent' &&
-            <button title='Mark as read' className='selectedMenu__read d-flex'>
-              <RiMailCheckLine />
-            </button>
+            <>
+              {
+                selectedType !== 'Read' &&
+                <button
+                  title='Mark as read'
+                  className='selectedMenu__read d-flex'
+                  onClick={ () => onClicktool('read', 'unread') }>
+                    <RiMailCheckLine />
+                </button>
+              }
+
+              {
+                selectedType !== 'Unread' &&
+                <button
+                  title='Mark as Unread'
+                  className='selectedMenu__read d-flex'
+                  onClick={ () => onClicktool('unread', 'read') }>
+                    <RiMailUnreadLine />
+                </button>
+              }
+            </>
           }
-          <button title='Add to' className='selectedMenu__addTo d-flex'>
-            <RiFolderSharedLine />
+          <button
+            title='Add to'
+            className='selectedMenu__addTo d-flex'>
+              <RiFolderSharedLine />
           </button>
 
-          <button title='Remove from' className='selectedMenu__removeFrom d-flex'>
+          <button
+            title='Remove from'
+            className='selectedMenu__removeFrom d-flex'
+            >
             <RiFolderReceivedLine />
           </button>
 
-          <button title='Mark' className='selectedMenu__mark d-flex'>
-            <RiBookmark3Line />
-          </button>
+          <>
+            {
+              selectedType !== 'Marked' &&
+              <button
+                title='Mark'
+                className='selectedMenu__mark d-flex'
+                onClick={ () => onClicktool('marked', 'unmarked') }>
+                  <RiBookmark3Line />
+              </button>
+            }
 
-          <button title='Delete' className='selectedMenu__delete d-flex'>
-            <RiDeleteBinLine />
+            {
+              selectedType !== 'Unmarked' &&
+              <button
+                title='Unmark'
+                className='selectedMenu__read d-flex'
+                onClick={ () => onClicktool('unmarked', 'marked') }>
+                  <RiBookmark2Line />
+              </button>
+            }
+          </>
+
+          <button
+            title='Delete'
+            className='selectedMenu__delete d-flex'
+            onClick={ () => onClicktool('delete', '') }>
+              <RiDeleteBinLine />
           </button>
           {
             folder !== 'Sent' &&
-            <button title='Spam' className='selectedMenu__spam d-flex'>
-              <RiSpamLine />
+            <button
+              title='Spam'
+              className='selectedMenu__spam d-flex'
+              onClick={ () => onClicktool('spam', '') }>
+                <RiSpamLine />
             </button>
           }
         </div>

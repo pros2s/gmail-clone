@@ -9,6 +9,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { removeSeletedById } from '../../../../redux/slices/selectedMessages';
+import { removeTool } from '../../../../redux/slices/selectedTools';
 
 import FoldersModal from '../foldersModal/FoldersModal';
 import MoreTools from '../moreTools/MoreTools';
@@ -60,9 +61,12 @@ const ToolsRight: FC<ToolsRightProps> = ({
   };
 
   const onClickBack = (e: MouseEvent<SVGElement>) => {
-    messageId.toString().length === 1 || messageId === '10'
+    messageId.toString().length === 1 || messageId.toString() === '10'
       ? onClickRightBtns(e, 'Inbox')
       : onClickRightBtns(e, 'Sent');
+
+    dispatch(removeTool('delete'));
+    dispatch(removeTool('spam'));
   };
 
   const onClickMore = (e: MouseEvent<SVGElement>) => {
@@ -88,8 +92,14 @@ const ToolsRight: FC<ToolsRightProps> = ({
           ? <RiArrowGoBackFill onClick={ (e) => onClickBack(e) } />
           :
           <>
-            <RiSpamFill className='message__tools-right-spam' title='spam' onClick={ (e) => onClickRightBtns(e, 'Spam') } />
-            <RiDeleteBinFill className='message__tools-right-delete' title='delete' onClick={ (e) => onClickRightBtns(e, 'Deleted') } />
+            <RiSpamFill
+              className='message__tools-right-spam'
+              title='spam'
+              onClick={ (e) => onClickRightBtns(e, 'Spam') } />
+            <RiDeleteBinFill
+              className='message__tools-right-delete'
+              title='delete'
+              onClick={ (e) => onClickRightBtns(e, 'Deleted') } />
 
             <div className="message__tools-right-more d-flex">
               <RiMore2Fill

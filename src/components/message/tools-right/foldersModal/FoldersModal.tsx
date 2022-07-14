@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
-import { RiFolder2Fill } from 'react-icons/ri';
+import { RiFolder3Line } from 'react-icons/ri';
 import { useAppSelector } from '../../../../hooks/useTypedSelector';
 
 import './foldersModal.scss';
@@ -46,7 +46,7 @@ const FoldersModal: FC<FoldersModalProps> = ({
   return (
     <div
       className={
-        showAddMenu || showDelMenu
+        (showAddMenu && additionFolders.length > 0) || (showDelMenu && removeFolders)
           ? 'message__tools-right-more-menu-folders active'
           : 'message__tools-right-more-menu-folders' }
       onClick={ (e) => e.stopPropagation() }>
@@ -54,7 +54,7 @@ const FoldersModal: FC<FoldersModalProps> = ({
           showAddMenu &&
           additionFolders.map((folder) => (
             <div key={ folder } className='d-flex ai-center' onClick={ (e) => addToFolder(e, folder) }>
-              <RiFolder2Fill />
+              <RiFolder3Line />
               <p>{ folder }</p>
             </div>
           ))
@@ -64,7 +64,7 @@ const FoldersModal: FC<FoldersModalProps> = ({
           showDelMenu &&
           removeFolders.map((folder) => (
             <div key={ folder } className='d-flex ai-center' onClick={ (e) => removeFromFolder(e, folder) }>
-              <RiFolder2Fill />
+              <RiFolder3Line />
               <p>{ folder }</p>
             </div>
           ))

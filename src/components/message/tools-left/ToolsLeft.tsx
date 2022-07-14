@@ -4,6 +4,7 @@ import { RiCheckboxCircleLine, RiBookmark3Fill } from 'react-icons/ri';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { addSelected, removeSeletedById } from '../../../redux/slices/selectedMessages';
+import { removeTool, setTool } from '../../../redux/slices/selectedTools';
 import { IFolders } from '../../../types/message';
 
 import './toolsLeft.scss';
@@ -50,9 +51,14 @@ const ToolsLeft: FC<ToolsLeftProps> = ({
   const onClickMark = (e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
 
-    isMarked
-      ? setFolderNames((state) => state.filter((item) => item !== 'Marked'))
-      : setFolderNames((state) => [ ...state, 'Marked' ]);
+    if (isMarked) {
+      setFolderNames((state) => state.filter((item) => item !== 'Marked'));
+      dispatch(removeTool('marked'));
+    }
+    else {
+      setFolderNames((state) => [ ...state, 'Marked' ]);
+      dispatch(setTool('marked'));
+    };
 
     setIsMarked((state) => !state);
   };

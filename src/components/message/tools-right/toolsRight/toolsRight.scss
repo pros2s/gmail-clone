@@ -18,12 +18,16 @@
   margin-right: -7px;
 }
 
+.message__tools-right-more {
+  position: relative;
+}
+
 .message__tools-right-more-menu {
   display: none;
 
   position: absolute;
-  top: 112%;
-  right: -12px;
+  top: 200%;
+  right: -17px;
   z-index: 1;
 
   &.active {

@@ -10,7 +10,8 @@ import Message from '../message/Message';
 
 import './messageList.scss';
 import '../../styles/index.scss';
-import { selectedAllFalse } from '../../redux/slices/selectedAll';
+import { selectedAllFalse } from '../../redux/slices/selectedMenu';
+import { clearTools } from '../../redux/slices/selectedTools';
 
 
 const MessageList: FC = () => {
@@ -18,6 +19,7 @@ const MessageList: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(clearTools());
     dispatch(selectedAllFalse());
     dispatch(clearSelected());
     dispatch(fetchApiMessages());
