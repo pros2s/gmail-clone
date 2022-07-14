@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 interface SelectedMenuState {
@@ -33,7 +33,12 @@ const selectedMenuSlice = createSlice({
   }
 });
 
-export const { selectedAllToggle, selectedAllTrue, selectedAllFalse, setSelectedType } = selectedMenuSlice.actions;
+export const {
+  selectedAllToggle,
+  selectedAllTrue,
+  selectedAllFalse,
+  setSelectedType
+} = selectedMenuSlice.actions;
 
 
 export default selectedMenuSlice.reducer;

@@ -9,17 +9,17 @@ const Footer: FC = () => {
     <div className='footer'>
       <a
         href='https://github.com/pros2s'
-        className="footer__github"
+        className='footer__github'
         target='_blank'
-        rel="noreferrer" >
+        rel='noreferrer' >
           <RiGithubFill />
       </a>
 
       <a
         href='https://alexandr-portfolio.netlify.app/'
-        className="footer__sign"
+        className='footer__sign'
         target='_blank'
-        rel="noreferrer" >
+        rel='noreferrer' >
           <p>@2022 ALEXANDR</p>
       </a>
     </div>

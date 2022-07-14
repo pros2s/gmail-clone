@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
 import {
   persistReducer,
   persistStore,
@@ -9,12 +10,12 @@ import {
   PURGE,
   REGISTER
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 import messagesReducer from './slices/messages';
 import messageInfoReducer from './slices/messageBody';
 import messageItemReducer from './slices/message';
 import selectedMessagesReducer from './slices/selectedMessages';
+
 import customFoldersReducer from './slices/customFolders';
 import selectedMenuReducer from './slices/selectedMenu';
 import selectedToolsReducer from './slices/selectedTools';

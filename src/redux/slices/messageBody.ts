@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IMessageContent } from "../../types/message";
-import { fetchMessageContent } from "./ActionCreators";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { IMessageContent } from '../../types/message';
+import { fetchMessageContent } from './ActionCreators';
 
 
 interface MessageContentState {

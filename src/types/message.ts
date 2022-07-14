@@ -1,6 +1,6 @@
 export interface IFolders {
-  id: string,
-  folders: string[]
+  folders: string[],
+  id: string
 }
 
 export interface IMessage {

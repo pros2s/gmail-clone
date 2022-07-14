@@ -106,12 +106,9 @@ const Message: FC<IMessageProps> = ({ message }) => {
   };
 
   const markChanges = () => {
-    if (isMarked && !folderNames.includes('Deleted')) {
-      setFolderNames((state) => [ ...state, 'Marked' ]);
-    }
-    else {
-      setFolderNames((state) => state.filter((name) => name !== 'Marked'));
-    }
+    isMarked && !folderNames.includes('Deleted')
+      ? setFolderNames((state) => [ ...state, 'Marked' ])
+      : setFolderNames((state) => state.filter((name) => name !== 'Marked'));
   };
 
   const routeSentMessages = () => {
@@ -139,10 +136,12 @@ const Message: FC<IMessageProps> = ({ message }) => {
     <>
       {
         folder && folderNames.includes(folder) &&
-
+        
         <div
           className={ messageClassName }
-          onClick={ () => onClickMessage() }>
+          onClick={ () => onClickMessage() }
+          title={ username }
+          tabIndex={ 1 }>
 
             <ToolsLeft
               setFolderNames={ setFolderNames }

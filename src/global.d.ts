@@ -1,2 +1,2 @@
-/// <reference types="redux-persist" />
+/// <reference types='redux-persist' />
 declare module '*.gif';

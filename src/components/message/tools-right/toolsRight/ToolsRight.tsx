@@ -1,12 +1,13 @@
-import classNames from 'classnames';
 import React, { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 import {
   RiArrowGoBackFill,
   RiDeleteBinFill,
   RiSpamFill,
   RiMore2Fill
 } from 'react-icons/ri';
-import { useParams } from 'react-router-dom';
+
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
 import { removeSeletedById } from '../../../../redux/slices/selectedMessages';
 import { removeTool } from '../../../../redux/slices/selectedTools';
@@ -19,34 +20,35 @@ import './toolsRight.scss';
 
 interface ToolsRightProps {
   setFolderNames: Dispatch<SetStateAction<string[]>>,
-  setIsMore: Dispatch<SetStateAction<boolean>>,
-  setIsRead: Dispatch<SetStateAction<boolean>>,
   setIsSelected: Dispatch<SetStateAction<boolean>>,
   setIsMarked: Dispatch<SetStateAction<boolean>>,
+  setIsMore: Dispatch<SetStateAction<boolean>>,
+  setIsRead: Dispatch<SetStateAction<boolean>>,
   folderNames: string[],
+  messageId: string,
   folder: string,
   isMore: boolean,
-  isRead: boolean,
-  messageId: string
+  isRead: boolean
 };
 
 const ToolsRight: FC<ToolsRightProps> = ({
   setFolderNames,
-  setIsMore,
-  setIsRead,
   setIsSelected,
   setIsMarked,
+  setIsMore,
+  setIsRead,
   folderNames,
+  messageId,
   folder,
   isMore,
-  isRead,
-  messageId
+  isRead
 }) => {
   const dispatch = useAppDispatch();
   const params = useParams();
 
   const [ showAddMenu, setShowAddMenu ] = useState(false);
   const [ showDelMenu, setShowDelMenu ] = useState(false);
+
 
   const onClickRightBtns = (e: MouseEvent<SVGElement>, folder: string) => {
     e.stopPropagation();
@@ -71,6 +73,7 @@ const ToolsRight: FC<ToolsRightProps> = ({
 
   const onClickMore = (e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
+    
     setIsMore((state) => !state);
   };
 
@@ -84,6 +87,7 @@ const ToolsRight: FC<ToolsRightProps> = ({
     'message__tools-right': true,
     'sent': params.folder === 'Sent'
   });
+
 
   return (
     <div className={ toolsRightClassNames }>
@@ -101,7 +105,7 @@ const ToolsRight: FC<ToolsRightProps> = ({
               title='delete'
               onClick={ (e) => onClickRightBtns(e, 'Deleted') } />
 
-            <div className="message__tools-right-more d-flex">
+            <div className='message__tools-right-more d-flex'>
               <RiMore2Fill
                 title='more'
                 onClick={ (e) => onClickMore(e) }/>

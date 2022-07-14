@@ -1,18 +1,18 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 interface customFoldersState {
   customFolders: string[],
+  editingFolderName: string,
   addition: boolean,
-  editing: boolean,
-  editingFolderName: string
+  editing: boolean
 };
 
 const initialState: customFoldersState = {
   customFolders: [],
+  editingFolderName: '',
   addition: false,
-  editing: false,
-  editingFolderName: ''
+  editing: false
 };
 
 const customFoldersSlice = createSlice({

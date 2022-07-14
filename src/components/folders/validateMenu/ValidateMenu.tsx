@@ -16,14 +16,14 @@ interface NewFolder {
 };
 
 interface ValidateMenuProps {
-  defaultValue: string,
   inputRef: RefObject<HTMLInputElement>,
-  title: string,
-  toggleHandler: ActionCreatorWithoutPayload<string>
+  toggleHandler: ActionCreatorWithoutPayload<string>,
   submitHandler: (folder: string) => void,
-}
+  defaultValue: string,
+  title: string
+};
 
-const ValidateMenu: FC<ValidateMenuProps> = ({ defaultValue, inputRef, title, toggleHandler, submitHandler }) => {
+const ValidateMenu: FC<ValidateMenuProps> = ({ inputRef, toggleHandler, submitHandler, defaultValue, title }) => {
   const dispatch = useAppDispatch();
   const { customFolders } = useAppSelector((state) => state.customFoldersReducer);
 
@@ -50,7 +50,8 @@ const ValidateMenu: FC<ValidateMenuProps> = ({ defaultValue, inputRef, title, to
         {
           ({ handleSubmit, values, handleChange }) => (
             <div className='validate-menu d-flex'>
-              <div className="d-flex ai-center">
+              
+              <div className='d-flex ai-center'>
                 <form className='validate-menu__form' onSubmit={ handleSubmit }>
                   <input
                     maxLength={ 15 }
@@ -70,6 +71,7 @@ const ValidateMenu: FC<ValidateMenuProps> = ({ defaultValue, inputRef, title, to
                 </form>
                 <RiCloseLine onClick={ () => dispatch(toggleHandler()) } title='cancel' tabIndex={ 1 } />
               </div>
+
               <ErrorMessage className='validate-menu__error' component='div' name='folderInput' />
             </div>
           )

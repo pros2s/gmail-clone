@@ -1,5 +1,6 @@
 import React, { FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { RiSearch2Line } from 'react-icons/ri';
+
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useTypedSelector';
 import { setFilteredMessages } from '../../../redux/slices/filteredMessages';
@@ -10,12 +11,14 @@ import './search.scss';
 const Search: FC = () => {
   const { messages } = useAppSelector((state) => state.messagesReducer);
   const dispatch = useAppDispatch();
+
   const [ value, setValue ] = useState('');
   const searchBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     !value && onSearchClick();
   }, [ value ]); //eslint-disable-line
+
 
   const onSearchClick = () => {
     const filteredMessagesByUsername = messages.filter((message) => message.username.toLowerCase().includes(value));
@@ -33,14 +36,15 @@ const Search: FC = () => {
 
 
   return (
-    <div className="toolbar__search">
+    <div className='toolbar__search' title='search'>
       <input
         placeholder='Search message'
-        type="text"
+        type='text'
         name='search'
         value={ value }
         onChange={ (e) => setValue(e.target.value) }
         onKeyUp={ (e) => clickSearchBtn(e) } />
+
       <button
         ref={ searchBtnRef }
         type='submit'

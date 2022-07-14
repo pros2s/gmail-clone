@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MessagesFolder from './pages/MessagesFolder';
 import MessageContent from './pages/MessageContent';
 import NotFound from './pages/NotFound/NotFound';
+
 import FooterWrapper from './wrappers/FooterWrapper';
 
 

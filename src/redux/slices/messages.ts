@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IMessage } from '../../types/message';
 import { fetchApiMessages } from './ActionCreators';
+import { IMessage } from '../../types/message';
 
 
 interface MessageState {

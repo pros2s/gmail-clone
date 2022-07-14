@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IFolders } from "../../types/message";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IFolders } from '../../types/message';
 
 
 interface SelectedMessagesState {

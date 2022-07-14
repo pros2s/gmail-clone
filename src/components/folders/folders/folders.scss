@@ -1,5 +1,6 @@
 @import '../../../styles/vars.scss';
 
+
 .folders {
   margin: 0 20px 0 0;
   min-width: 180px;
@@ -9,11 +10,10 @@
 
 .folders__line {
   display: inline-block;
+  background-color: rgb(206 206 206);
 
   height: 1px;
   width: 100px;
-
-  background-color: rgb(206 206 206);
 }
 
 .folders__item {
@@ -88,7 +88,9 @@
 .folders__item-tools-edit,
 .folders__item-tools-remove {
   font-size: 15px;
+
   margin-left: 5px;
+  
   transition: transform .1s linear;
 
   &:hover {

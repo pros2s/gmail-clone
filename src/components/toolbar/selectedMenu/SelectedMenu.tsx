@@ -10,10 +10,11 @@ import {
 } from 'react-icons/ri';
 
 import { useAppSelector } from '../../../hooks/useTypedSelector';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+
+import { clearTools, removeTool, setTool } from '../../../redux/slices/selectedTools';
 
 import './selectedMenu.scss';
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { clearTools, removeTool, setTool } from '../../../redux/slices/selectedTools';
 
 
 const SelectedMenu: FC = () => {
@@ -54,7 +55,8 @@ const SelectedMenu: FC = () => {
                 selectedType !== 'Unread' &&
                 <button
                   title='Mark as Unread'
-                  className='selectedMenu__read d-flex'
+                  style={{ marginRight: 20 }}
+                  className='selectedMenu__unread d-flex'
                   onClick={ () => onClicktool('unread', 'read') }>
                     <RiMailUnreadLine />
                 </button>
@@ -76,7 +78,8 @@ const SelectedMenu: FC = () => {
               selectedType !== 'Unmarked' &&
               <button
                 title='Unmark'
-                className='selectedMenu__read d-flex'
+                style={{ marginRight: 20 }}
+                className='selectedMenu__unmark d-flex'
                 onClick={ () => onClicktool('unmarked', 'marked') }>
                   <RiBookmark2Line />
               </button>
@@ -89,6 +92,7 @@ const SelectedMenu: FC = () => {
             onClick={ () => onClicktool('delete', '') }>
               <RiDeleteBinLine />
           </button>
+
           {
             folder !== 'Sent' &&
             <button

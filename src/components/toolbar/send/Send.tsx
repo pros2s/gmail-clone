@@ -1,48 +1,49 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { RiMessage3Line, RiCloseLine } from 'react-icons/ri';
-import TextareaAutosize from 'react-textarea-autosize';
 
+import TextareaAutosize from 'react-textarea-autosize';
 import uniqid from 'uniqid';
+import classNames from 'classnames';
 import { ErrorMessage, Formik } from 'formik';
 import * as yup from 'yup';
 
-import './send.scss';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
+
 import { IMessage, IMessageContent } from '../../../types/message';
-import classNames from 'classnames';
 import { addContent } from '../../../redux/slices/messageBody';
 import { addInfo } from '../../../redux/slices/message';
 import { addNewMessage } from '../../../redux/slices/filteredMessages';
 
+import './send.scss';
+
 
 interface ComposeForm {
-  emailTo: string,
   emailFrom: string,
+  emailTo: string,
   subject: string,
   message: string
 };
 
 const Send: FC = () => {
   const dispatch = useAppDispatch();
-  const emailToRef = useRef<HTMLInputElement>(null);
 
   const [ isSend, setIsSend ] = useState(false);
 
 
   const formFields: ComposeForm = {
-    emailTo: '',
     emailFrom: 'default@email.ru',
+    emailTo: '',
     subject: '',
     message: ''
   };
 
   const formValidation = yup.object({
-    emailTo:
+    emailFrom:
       yup.string()
         .required('Not required')
         .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Not valid email adress'),
 
-    emailFrom:
+    emailTo:
       yup.string()
         .required('Not required')
         .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Not valid email adress'),
@@ -59,6 +60,7 @@ const Send: FC = () => {
 
   const formSubmit = (values: ComposeForm) => {
     const newId = uniqid();
+
     const newMessage: IMessage = {
       name: values.subject,
       username: 'Alexandr',
@@ -75,12 +77,12 @@ const Send: FC = () => {
     dispatch(addContent(newMessageContent));
     dispatch(addNewMessage(newMessage));
     dispatch(addInfo(newMessage));
+
     setIsSend(false);
   };
 
   const onClickCompose = () => {
     setIsSend((state) => !state);
-    emailToRef.current?.focus();
   };
 
   const modalClassName = classNames({
@@ -90,11 +92,11 @@ const Send: FC = () => {
 
 
   return (
-    <div className="toolbar__send d-flex ai-center" onClick={ () => onClickCompose() }>
+    <div className='toolbar__send d-flex ai-center' onClick={ () => onClickCompose() } title='send new message'>
       <button className='toolbar__send-btn d-flex'>
         <RiMessage3Line />
       </button>
-      <p className="toolbar__send-text">Compose</p>
+      <p className='toolbar__send-text'>Compose</p>
 
       <div className={ modalClassName }>
 
@@ -108,20 +110,19 @@ const Send: FC = () => {
             {
               ({ handleSubmit, values, handleChange, resetForm }) => (
                 <form
-                  className="toolbar__send-modal-content d-flex"
+                  className='toolbar__send-modal-content d-flex'
                   onSubmit={ handleSubmit }
                   onClick={ (e) => e.stopPropagation() }>
                     <input
-                      type="text"
+                      type='text'
                       name='emailTo'
                       placeholder='To'
-                      ref={ emailToRef }
                       value={ values.emailTo }
                       onChange={ handleChange } />
                     <ErrorMessage className='toolbar__send-input-error' component='div' name='emailTo' />
 
                     <input
-                      type="email"
+                      type='email'
                       name='emailFrom'
                       placeholder='From'
                       value={ values.emailFrom }
@@ -129,7 +130,7 @@ const Send: FC = () => {
                     <ErrorMessage className='toolbar__send-input-error' component='div' name='emailFrom' />
 
                     <input
-                      type="text"
+                      type='text'
                       name='subject'
                       placeholder='Subject'
                       value={ values.subject }
@@ -143,10 +144,10 @@ const Send: FC = () => {
                       placeholder='Message'
                       value={ values.message }
                       onChange={ handleChange }  />
-
                     <ErrorMessage className='toolbar__send-input-error' component='div' name='message' />
 
                     <button type='submit'>Send</button>
+                    
                     <RiCloseLine
                       className='toolbar__send-close-modal'
                       onClick={ () => setIsSend(false) }

@@ -1,12 +1,14 @@
 import React, { FC, useEffect } from 'react';
+
+import { fetchApiMessageById, fetchMessageContent } from '../../redux/slices/ActionCreators';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useTypedSelector';
-import { fetchApiMessageById, fetchMessageContent } from '../../redux/slices/ActionCreators';
 
-import './messageInfo.scss';
-import '../../styles/index.scss';
 import FoldersWrapper from '../../wrappers/FoldersWrapper';
 import LoaderComp from '../loader/Loader';
+
+import '../../styles/index.scss';
+import './messageInfo.scss';
 
 
 interface IMessageInfoProps {
@@ -33,28 +35,31 @@ const MessageInfo: FC<IMessageInfoProps> = ({ messageId }) => {
     <div style={{ width: '100%' }}>
       {
         isLoading ? <LoaderComp /> :
-          <div className="message__content">
-            <div className="message__content-title d-flex">
+          <div className='message__content'>
+
+            <div className='message__content-title d-flex'>
               <span>Theme:</span>
               <h1>{ info?.username }</h1>
             </div>
 
-            <div className="message__content-name d-flex">
+            <div className='message__content-name d-flex'>
               <span>Author:</span>
               <h3>{ info?.name }</h3>
             </div>
 
-            <div className="message__content-email d-flex">
+            <div className='message__content-email d-flex'>
               <span>From:</span>
               <a href={`mailto:${ info?.email}`}>{ info?.email }</a>
             </div>
 
-            <div className="message__content-body d-flex">
+            <div className='message__content-body d-flex'>
               <span>Message:</span>
               <p>{ content?.body }</p>
             </div>
+
           </div>
       }
+      
       { isError && <h1>{ isError }</h1> }
     </div>
   );

@@ -55,8 +55,9 @@ const Folders: FC = () => {
         tabIndex={ 1 }
         onKeyUp={ (e) => onKeyUp(e) }
         key={ folder }
+        title={ folder }
         onClick={ () => route(`/mailclone/${ folder }`) }>
-          <div className="folders__item-info d-flex">
+          <div className='folders__item-info d-flex'>
             { icons[i] }
             <p>{ folder }</p>
           </div>
@@ -66,15 +67,18 @@ const Folders: FC = () => {
 
   const onClickEdit = (folder: string, e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
+
     dispatch(editingToggle());
     dispatch(setEditingFolderName(folder))
   };
 
   const onClickDelete = (folder: string, e: MouseEvent<SVGElement>) => {
+
     e.stopPropagation();
     route(`/mailclone/Inbox`);
     dispatch(removeCustomFolder(folder))
   };
+
 
   const customFoldersElements = customFolders.map((folder) => {
     return (
@@ -82,20 +86,23 @@ const Folders: FC = () => {
         tabIndex={ 1 }
         onKeyUp={ (e) => onKeyUp(e) }
         key={ folder }
+        title={ folder }
         onClick={ () => route(`/mailclone/${ folder }`) }>
           {
             editingFolderName === folder && editing ? <EditMenu /> :
             <div className={ folder === folderName ? 'folders__item active d-flex' : 'folders__item d-flex' }>
-              <div title={ folder } className="folders__item-info d-flex">
+              <div title={ folder } className='folders__item-info d-flex'>
                 <RiFolder2Fill />
                 <p className='folders__item-info-name'>{ folder }</p>
               </div>
-              <div className="folders__item-tools d-flex">
+              <div className='folders__item-tools d-flex'>
                 <RiEdit2Fill
                   className='folders__item-tools-edit'
+                  title='edit'
                   onClick={ (e) => onClickEdit(folder, e) } />
                 <RiDeleteBinLine
                   className='folders__item-tools-remove'
+                  title='delete'
                   onClick={ (e) => onClickDelete(folder, e) } />
               </div>
             </div>
@@ -106,26 +113,32 @@ const Folders: FC = () => {
 
 
   return (
-    <div className="folders">
+    <div className='folders'>
       <ul>
         { mainFoldersElements }
       </ul>
 
-      <div className="folders__line"></div>
+      <div className='folders__line'></div>
 
       <ul className='folders__custom'>
         { customFoldersElements }
       </ul>
 
       {
-        addition ? <AddMenu /> :
-        <button
-          tabIndex={ 1 }
-          onKeyUp={ (e) => onKeyUp(e) }
-          className='folders__add d-flex'
-          onClick={ () => dispatch(additionToggle()) }>
-            <RiAddLine />
-        </button>
+        customFolders.length < 8 &&
+        <>
+          {
+            addition ? <AddMenu /> :
+            <button
+              tabIndex={ 1 }
+              onKeyUp={ (e) => onKeyUp(e) }
+              className='folders__add d-flex'
+              title='add new folder'
+              onClick={ () => dispatch(additionToggle()) }>
+                <RiAddLine />
+            </button>
+          }
+        </>
       }
     </div>
   );
