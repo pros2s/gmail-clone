@@ -1,31 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IFolders } from "../../types/message";
 
 
 interface SelectedMessagesState {
-  messagesId: string[]
+  folderNamesArray: IFolders[]
 };
 
 const initialState: SelectedMessagesState = {
-  messagesId: []
+  folderNamesArray: []
 };
 
 const selectedMessagesSlice = createSlice({
   name: 'selected',
   initialState,
   reducers: {
-    addChoosed(state, { payload }: PayloadAction<string>) {
-      state.messagesId = [ ...state.messagesId, payload ];
+    addSelected(state, { payload }: PayloadAction<IFolders>) {
+      state.folderNamesArray = [ ...state.folderNamesArray, payload ];
     },
-    removeById(state, { payload }: PayloadAction<string>) {
-      state.messagesId = state.messagesId.filter((id) => id !== payload);
+    removeSeletedById(state, { payload }: PayloadAction<string>) {
+      state.folderNamesArray = state.folderNamesArray.filter((foldersArray) => foldersArray.id !== payload);
     },
     clearSelected(state) {
-      state.messagesId = []
+      state.folderNamesArray = []
     }
   }
 });
 
-export const { addChoosed, removeById, clearSelected } = selectedMessagesSlice.actions;
+export const { addSelected, removeSeletedById, clearSelected } = selectedMessagesSlice.actions;
 
 
 export default selectedMessagesSlice.reducer;

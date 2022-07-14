@@ -8,7 +8,7 @@ import {
 } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
-import { removeById } from '../../../../redux/slices/selectedMessages';
+import { removeSeletedById } from '../../../../redux/slices/selectedMessages';
 
 import FoldersModal from '../foldersModal/FoldersModal';
 import MoreTools from '../moreTools/MoreTools';
@@ -56,7 +56,7 @@ const ToolsRight: FC<ToolsRightProps> = ({
     setIsSelected(false);
     setIsMarked(false);
 
-    dispatch(removeById(messageId));
+    dispatch(removeSeletedById(messageId));
   };
 
   const onClickBack = (e: MouseEvent<SVGElement>) => {

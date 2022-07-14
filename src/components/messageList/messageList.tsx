@@ -10,6 +10,7 @@ import Message from '../message/Message';
 
 import './messageList.scss';
 import '../../styles/index.scss';
+import { selectedAllFalse } from '../../redux/slices/selectedAll';
 
 
 const MessageList: FC = () => {
@@ -17,6 +18,7 @@ const MessageList: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(selectedAllFalse());
     dispatch(clearSelected());
     dispatch(fetchApiMessages());
   }, []); // eslint-disable-line

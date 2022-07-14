@@ -16,12 +16,13 @@ import './selectedMenu.scss';
 
 const SelectedMenu: FC = () => {
   const { folder } = useParams();
-  const { messagesId } = useAppSelector((state) => state.selectedMessagesReducer);
+  const { folderNamesArray } = useAppSelector((state) => state.selectedMessagesReducer);
+
 
   return (
     <>
       {
-        messagesId.length > 0 &&
+        folderNamesArray.length > 0 &&
         <div className='selectedMenu d-flex ai-center'>
           {
             folder !== 'Sent' &&

@@ -3,12 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { randomDate } from '../../redux/slices/ActionCreators';
-import { IMessage } from '../../types/message';
+import { IFolders, IMessage } from '../../types/message';
 import './message.scss';
 import ToolsRight from './tools-right/toolsRight/ToolsRight';
 import ToolsLeft from './tools-left/ToolsLeft';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useTypedSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { addSelected, removeSeletedById } from '../../redux/slices/selectedMessages';
 
 
 interface IMessageProps {
@@ -17,7 +18,9 @@ interface IMessageProps {
 
 const Message: FC<IMessageProps> = ({ message }) => {
   const { name, username, id } = message;
+  const dispatch = useAppDispatch();
   const { content } = useAppSelector((state) => state.messageInfoReducer);
+  const { selectedAll } = useAppSelector((state) => state.selectedAllRducer);
 
   const { folder } = useParams();
   const route = useNavigate();
@@ -36,6 +39,23 @@ const Message: FC<IMessageProps> = ({ message }) => {
     setRandDate(randomDate('02/13/2022', '01/01/2000'));
     // setRandDate(randomDate());
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    setIsSelected(false);
+  }, [ folder ]);
+
+  useEffect(() => {
+    setIsSelected(selectedAll);
+  }, [ selectedAll ]);
+
+  useEffect(() => {
+    const newSelected: IFolders = {
+      folders: folderNames,
+      id
+    };
+
+    isSelected ? dispatch(addSelected(newSelected)) : dispatch(removeSeletedById(id));
+  }, [ isSelected ]);
 
 
   const routeSentMessages = () => {
@@ -72,6 +92,7 @@ const Message: FC<IMessageProps> = ({ message }) => {
               setIsSelected={ setIsSelected }
               setIsMarked={ setIsMarked }
               folder={ folder }
+              folderNames={ folderNames }
               isSelected={ isSelected }
               isMarked={ isMarked }
               id={ id } />

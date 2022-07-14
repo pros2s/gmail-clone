@@ -3,7 +3,8 @@ import React, { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
 import { RiCheckboxCircleLine, RiBookmark3Fill } from 'react-icons/ri';
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { addChoosed, removeById } from '../../../redux/slices/selectedMessages';
+import { addSelected, removeSeletedById } from '../../../redux/slices/selectedMessages';
+import { IFolders } from '../../../types/message';
 
 import './toolsLeft.scss';
 
@@ -13,6 +14,7 @@ interface ToolsLeftProps {
   setIsSelected: Dispatch<SetStateAction<boolean>>,
   setIsMarked: Dispatch<SetStateAction<boolean>>,
   folder: string,
+  folderNames: string[],
   isSelected: boolean,
   isMarked: boolean,
   id: string
@@ -23,6 +25,7 @@ const ToolsLeft: FC<ToolsLeftProps> = ({
   setIsSelected,
   setIsMarked,
   folder,
+  folderNames,
   isSelected,
   isMarked,
   id
@@ -32,9 +35,14 @@ const ToolsLeft: FC<ToolsLeftProps> = ({
   const onClickCheck = (e: MouseEvent<SVGElement>) => {
     e.stopPropagation();
 
+    const newSelected: IFolders = {
+      folders: folderNames,
+      id
+    };
+
     isSelected
-      ? dispatch(removeById(id))
-      : dispatch(addChoosed(id));
+      ? dispatch(addSelected(newSelected))
+      : dispatch(removeSeletedById(id));
 
     setIsSelected((state) => !state);
   };

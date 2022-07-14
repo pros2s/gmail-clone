@@ -16,7 +16,7 @@ import messageInfoReducer from './slices/messageBody';
 import messageItemReducer from './slices/message';
 import selectedMessagesReducer from './slices/selectedMessages';
 import customFoldersReducer from './slices/customFolders';
-import messageFolderNamesReducer from './slices/messageFolderNames';
+import selectedAllRducer from './slices/selectedAll';
 
 
 const persistConfig = {
@@ -31,7 +31,7 @@ const rootRducer = combineReducers({
   messageItemReducer,
   selectedMessagesReducer,
   customFoldersReducer,
-  messageFolderNamesReducer
+  selectedAllRducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootRducer);
