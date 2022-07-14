@@ -1,0 +1,23 @@
+.footer {
+  position: absolute;
+  top: 65%;
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer__github {
+  display: flex;
+  font-size: 30px;
+  height: 30px;
+  margin-right: 20px;
+}
+
+.footer__sign {
+  font-size: 16px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
